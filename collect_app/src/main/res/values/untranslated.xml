@@ -11,9 +11,15 @@ the specific language governing permissions and limitations under the License. -
     <string name="protocol_odk_default" translatable="false">odk_default</string>
     <string name="protocol_google_sheets" translatable="false">google_sheets</string>
     <string name="protocol_other" translatable="false">other_protocol</string>
-    <string name="default_server_url" translatable="false">https://opendatakit.appspot.com</string>
-    <string name="default_odk_formlist" translatable="false">/formList</string>
-    <string name="default_odk_submission" translatable="false">/submission</string>
+
+<!--    <string name="default_server_url" translatable="false">https://opendatakit.appspot.com</string>-->
+<!--    <string name="default_odk_formlist" translatable="false">/formList</string>-->
+<!--    <string name="default_odk_submission" translatable="false">/submission</string>-->
+
+    <string name="default_server_url" translatable="false">http://data.solversbd.com</string>
+    <string name="default_odk_formlist" translatable="false">/GetForms</string>
+    <string name="default_odk_submission" translatable="false">/Main/submission.php</string>
+
     <string name="transport_type_value_internet" translatable="false">internet</string>
     <string name="transport_type_value_sms" translatable="false">sms</string>
     <string name="transport_type_value_both" translatable="false">both</string>
