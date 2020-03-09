@@ -14,20 +14,20 @@
     android:orientation="vertical"
     android:background="?colorSurface">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="4dp">
+<!--    <com.google.android.material.appbar.AppBarLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:elevation="4dp">-->
 
-        <com.google.android.material.appbar.MaterialToolbar xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/toolbar"
-            style="@style/Widget.Collect.Toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/notes"
-            tools:title="ODK Collect" />
+<!--        <com.google.android.material.appbar.MaterialToolbar xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--            android:id="@+id/toolbar"-->
+<!--            style="@style/Widget.Collect.Toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:navigationIcon="@drawable/notes"-->
+<!--            tools:title="ODK Collect" />-->
 
-    </com.google.android.material.appbar.AppBarLayout>
+<!--    </com.google.android.material.appbar.AppBarLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/margin_standard"
                 android:paddingTop="@dimen/margin_small"
@@ -55,56 +55,119 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="547dp"
                     android:orientation="vertical">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/enter_data"
-                        style="@style/Widget.Collect.Button.MainMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_extra_small"
-                        tools:text="@string/enter_data" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/review_data"
-                        style="@style/Widget.Collect.Button.MainMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_extra_small"
-                        tools:text="@string/review_data" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/send_data"
-                        style="@style/Widget.Collect.Button.MainMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_extra_small"
-                        tools:text="@string/send_data" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/view_sent_forms"
-                        style="@style/Widget.Collect.Button.MainMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_extra_small"
-                        android:text="@string/view_sent_forms" />
-
-                    <com.google.android.material.button.MaterialButton
+                    <Button
                         android:id="@+id/get_forms"
-                        style="@style/Widget.Collect.Button.MainMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_extra_small"
-                        tools:text="@string/get_forms" />
+                        android:layout_width="250dip"
+                        android:layout_height="50dip"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/download"
+                        android:padding="20dp"
+                        android:textSize="21dp" />
 
-                    <com.google.android.material.button.MaterialButton
+                    <Button
+                        android:id="@+id/enter_data"
+                        android:layout_width="250dip"
+                        android:layout_height="50dip"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/open"
+                        android:padding="20dp"
+                        android:textSize="21dp" />
+
+                    <Button
+                        android:id="@+id/review_data"
+                        android:layout_width="250dip"
+                        android:layout_height="50dip"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edit"
+                        android:padding="20dp"
+                        android:textSize="21dp" />
+
+                    <Button
+                        android:id="@+id/send_data"
+                        android:layout_width="250dip"
+                        android:layout_height="50dip"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/send"
+                        android:padding="20dp"
+                        android:textSize="21dp" />
+
+                    <Button
+                        android:id="@+id/view_sent_forms"
+                        android:layout_width="250dip"
+                        android:layout_height="50dip"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/send_form_list"
+                        android:padding="20dp"
+                        android:textSize="21dp" />
+
+                    <Button
                         android:id="@+id/manage_forms"
-                        style="@style/Widget.Collect.Button.MainMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_extra_small"
-                        tools:text="@string/manage_files" />
+                        android:layout_width="250dip"
+                        android:layout_height="50dip"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/delete"
+                        android:padding="20dp"
+                        android:textSize="21dp" />
+
+
+                    <!--                    <com.google.android.material.button.MaterialButton-->
+                    <!--                        android:id="@+id/get_forms"-->
+                    <!--                        style="@style/Widget.Collect.Button.MainMenu"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/margin_extra_small"-->
+                    <!--                        tools:text="@string/get_forms" />-->
+
+                    <!--                    <com.google.android.material.button.MaterialButton-->
+                    <!--                        android:id="@+id/enter_data"-->
+                    <!--                        style="@style/Widget.Collect.Button.MainMenu"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/margin_extra_small"-->
+                    <!--                        tools:text="@string/enter_data" />-->
+
+                    <!--                    <com.google.android.material.button.MaterialButton-->
+                    <!--                        android:id="@+id/review_data"-->
+                    <!--                        style="@style/Widget.Collect.Button.MainMenu"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/margin_extra_small"-->
+                    <!--                        tools:text="@string/review_data" />-->
+
+                    <!--                    <com.google.android.material.button.MaterialButton-->
+                    <!--                        android:id="@+id/send_data"-->
+                    <!--                        style="@style/Widget.Collect.Button.MainMenu"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/margin_extra_small"-->
+                    <!--                        tools:text="@string/send_data" />-->
+
+                    <!--                    <com.google.android.material.button.MaterialButton-->
+                    <!--                        android:id="@+id/view_sent_forms"-->
+                    <!--                        style="@style/Widget.Collect.Button.MainMenu"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/margin_extra_small"-->
+                    <!--                        android:text="@string/view_sent_forms" />-->
+
+
+                    <!--                    <com.google.android.material.button.MaterialButton-->
+                    <!--                        android:id="@+id/manage_forms"-->
+                    <!--                        style="@style/Widget.Collect.Button.MainMenu"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/margin_extra_small"-->
+                    <!--                        tools:text="@string/manage_files" />-->
 
                     <TextView
                         android:id="@+id/version_sha"
@@ -112,10 +175,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/margin_standard"
-                        tools:text="commit sha" />
+                        android:layout_marginTop="100dp"
+                        tools:text="Developed By: Solvers" />
 
                 </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>

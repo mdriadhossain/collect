@@ -4,6 +4,11 @@
     android:title="@string/main_menu_settings">
 
     <PreferenceCategory android:title="@string/found_in_main">
+
+        <CheckBoxPreference
+            android:key="get_blank"
+            android:title="@string/get_forms" />
+
         <CheckBoxPreference
             android:key="edit_saved"
             android:title="@string/review_data" />
@@ -13,9 +18,7 @@
         <CheckBoxPreference
             android:key="view_sent"
             android:title="@string/view_sent_forms" />
-        <CheckBoxPreference
-            android:key="get_blank"
-            android:title="@string/get_forms" />
+
         <CheckBoxPreference
             android:key="delete_saved"
             android:title="@string/manage_files" />
