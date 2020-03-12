@@ -14,20 +14,20 @@
     android:orientation="vertical"
     android:background="?colorSurface">
 
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:elevation="4dp">-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp">
 
-<!--        <com.google.android.material.appbar.MaterialToolbar xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--            android:id="@+id/toolbar"-->
-<!--            style="@style/Widget.Collect.Toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:navigationIcon="@drawable/notes"-->
-<!--            tools:title="ODK Collect" />-->
+        <com.google.android.material.appbar.MaterialToolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/toolbar"
+            style="@style/Widget.Collect.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/notes"
+            tools:title="Data Collector" />
 
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="547dp"
+                    android:layout_height="460dp"
                     android:orientation="vertical">
 
                     <Button
@@ -63,10 +63,10 @@
                         android:layout_width="250dip"
                         android:layout_height="50dip"
                         android:layout_gravity="center_vertical|center_horizontal"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="20dp"
                         android:background="@drawable/download"
                         android:padding="20dp"
-                        android:textSize="21dp" />
+                        android:textSize="21sp" />
 
                     <Button
                         android:id="@+id/enter_data"
@@ -76,7 +76,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/open"
                         android:padding="20dp"
-                        android:textSize="21dp" />
+                        android:textSize="21sp" />
 
                     <Button
                         android:id="@+id/review_data"
@@ -86,7 +86,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/edit"
                         android:padding="20dp"
-                        android:textSize="21dp" />
+                        android:textSize="21sp" />
 
                     <Button
                         android:id="@+id/send_data"
@@ -96,7 +96,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/send"
                         android:padding="20dp"
-                        android:textSize="21dp" />
+                        android:textSize="21sp" />
 
                     <Button
                         android:id="@+id/view_sent_forms"
@@ -106,7 +106,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/send_form_list"
                         android:padding="20dp"
-                        android:textSize="21dp" />
+                        android:textSize="21sp" />
 
                     <Button
                         android:id="@+id/manage_forms"
@@ -117,7 +117,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/delete"
                         android:padding="20dp"
-                        android:textSize="21dp" />
+                        android:textSize="21sp" />
 
 
                     <!--                    <com.google.android.material.button.MaterialButton-->
@@ -175,7 +175,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="100dp"
+                        android:layout_marginTop="30dp"
                         tools:text="Developed By: Solvers" />
 
                 </LinearLayout>

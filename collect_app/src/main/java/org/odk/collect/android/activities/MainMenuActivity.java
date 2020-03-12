@@ -155,7 +155,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
 
         // enter data button. expects a result.
         Button enterDataButton = findViewById(R.id.enter_data);
-        enterDataButton.setText(getString(R.string.enter_data_button));
+        //enterDataButton.setText(getString(R.string.enter_data_button));
         enterDataButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,7 +169,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
 
         // review data button. expects a result.
         reviewDataButton = findViewById(R.id.review_data);
-        reviewDataButton.setText(getString(R.string.review_data_button));
+        //reviewDataButton.setText(getString(R.string.review_data_button));
         reviewDataButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,7 +184,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
 
         // send data button. expects a result.
         sendDataButton = findViewById(R.id.send_data);
-        sendDataButton.setText(getString(R.string.send_data_button));
+        //sendDataButton.setText(getString(R.string.send_data_button));
         sendDataButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,7 +212,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
 
         // manage forms button. no result expected.
         getFormsButton = findViewById(R.id.get_forms);
-        getFormsButton.setText(getString(R.string.get_forms));
+       // getFormsButton.setText(getString(R.string.get_forms));
         getFormsButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,7 +241,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
 
         // manage forms button. no result expected.
         manageFilesButton = findViewById(R.id.manage_forms);
-        manageFilesButton.setText(getString(R.string.manage_files));
+       // manageFilesButton.setText(getString(R.string.manage_files));
         manageFilesButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -253,7 +253,8 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
             }
         });
 
-        String versionSHA = viewModel.getVersionCommitDescription();
+        //String versionSHA = viewModel.getVersionCommitDescription();
+        String versionSHA = null;
         if (versionSHA != null) {
             versionSHAView.setText(versionSHA);
         } else {
@@ -687,7 +688,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
 
     private void displayStorageMigrationBanner() {
         storageMigrationBanner.setVisibility(View.VISIBLE);
-        storageMigrationBannerText.setText(R.string.scoped_storage_banner_text);
+        //storageMigrationBannerText.setText(R.string.scoped_storage_banner_text);
         storageMigrationBannerLearnMoreButton.setVisibility(View.VISIBLE);
         storageMigrationBannerDismissButton.setVisibility(View.GONE);
     }

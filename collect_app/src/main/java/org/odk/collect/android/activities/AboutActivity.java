@@ -40,10 +40,18 @@ import timber.log.Timber;
 public class AboutActivity extends CollectAbstractActivity implements
         AboutListAdapter.AboutItemClickListener {
 
+//    private static final String LICENSES_HTML_PATH = "file:///android_asset/open_source_licenses.html";
+//    private static final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=";
+//    private static final String ODK_WEBSITE = "https://opendatakit.org";
+//    private static final String ODK_FORUM = "https://forum.opendatakit.org";
+
+
     private static final String LICENSES_HTML_PATH = "file:///android_asset/open_source_licenses.html";
-    private static final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=";
-    private static final String ODK_WEBSITE = "https://opendatakit.org";
-    private static final String ODK_FORUM = "https://forum.opendatakit.org";
+    private static final String GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=org.sdcs.collect.androidupdatebn";
+    private static final String ODK_WEBSITE = "http://mydata.solversbd.com/";
+    private static final String ODK_FORUM = "http://mydata.solversbd.com/";
+
+
 
     private CustomTabHelper websiteTabHelper;
     private CustomTabHelper forumTabHelper;
