@@ -1,0 +1,4 @@
+1. Front page icon value backgroung hazard.
+2. version number (v1.26.0) of front page after "Solvers Data Collector".
+3. "Language" change on General Settings-> User Interface->Language.
+4. 

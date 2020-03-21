@@ -1,0 +1,10 @@
+1. collect_app/src/main/res/values/strings.xml
+2. android/activities/MainMenuActivity.java
+3. android/activities/AboutActivity.java
+4. res/layout/main_menu.xml
+5. res/layout/main_menu.xml
+6. collect_app/src/main/res/values/untranslated.xml
+7. collect_app/src/main/res/values/arrays.xml
+8.
+
+

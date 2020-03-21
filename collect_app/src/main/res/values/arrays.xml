@@ -60,9 +60,9 @@ the specific language governing permissions and limitations under the License. -
         <item>swipe_buttons</item>
     </string-array>
     <string-array name="navigation_entries">
+        <item>@string/swipe_buttons_navigation</item>
         <item>@string/swipe_navigation</item>
         <item>@string/buttons_navigation</item>
-        <item>@string/swipe_buttons_navigation</item>
     </string-array>
     <string-array name="constraint_behavior_entry_values" translatable="false">
         <item>on_swipe</item>
