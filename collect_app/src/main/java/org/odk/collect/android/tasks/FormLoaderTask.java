@@ -31,9 +31,6 @@ import org.javarosa.form.api.FormEntryModel;
 import org.javarosa.xform.parse.XFormParser;
 import org.javarosa.xform.util.XFormUtils;
 import org.javarosa.xpath.XPathTypeMismatchException;
-import org.javarosa.xpath.eval.Indexer;
-import org.javarosa.xpath.eval.IndexerCreator;
-import org.odk.collect.android.IndexerCreatorImpl;
 import org.odk.collect.android.R;
 import org.odk.collect.android.application.Collect;
 import org.odk.collect.android.database.ItemsetDbAdapter;
@@ -47,6 +44,7 @@ import org.odk.collect.android.external.handler.ExternalDataHandlerPull;
 import org.odk.collect.android.listeners.FormLoaderListener;
 import org.odk.collect.android.logic.FormController;
 import org.odk.collect.android.utilities.FileUtils;
+import org.odk.collect.android.utilities.FormDefCache;
 import org.odk.collect.android.utilities.ZipUtils;
 
 import java.io.File;
@@ -120,12 +118,6 @@ public class FormLoaderTask extends AsyncTask<String, String, FormLoaderTask.FEC
      */
     @Override
     protected FECWrapper doInBackground(String... path) {
-        //#Indexation
-        if(IndexerCreatorImpl.indexerMode == IndexerCreatorImpl.MEMORY_ONLY
-                || IndexerCreatorImpl.indexerMode == IndexerCreatorImpl.DATABASE
-                || IndexerCreatorImpl.indexerMode == IndexerCreatorImpl.MIXED)
-        XFormParser.initIndexerResolver(new IndexerCreatorImpl());
-
         errorMsg = null;
 
         final String formPath = path[0];
@@ -196,7 +188,7 @@ public class FormLoaderTask extends AsyncTask<String, String, FormLoaderTask.FEC
                 // but we should give the option to the user to edit the form
                 // otherwise the survey will be TOTALLY inaccessible.
                 Timber.w("We have a syntactically correct instance, but the data threw an "
-                                + "exception inside JR. We should allow editing.");
+                        + "exception inside JR. We should allow editing.");
             } else {
                 errorMsg = e.getMessage();
                 return null;
@@ -225,13 +217,12 @@ public class FormLoaderTask extends AsyncTask<String, String, FormLoaderTask.FEC
         publishProgress(
                 Collect.getInstance().getString(R.string.survey_loading_reading_form_message));
 
-        final FormDef formDefFromCache = null;// FormDefCache.readCache(formXml);
+        final FormDef formDefFromCache = FormDefCache.readCache(formXml);
         if (formDefFromCache != null) {
             return formDefFromCache;
         }
 
         // no binary, read from xml
-<<<<<<< HEAD
         Timber.i("Attempting to load from: %s", formXml.getAbsolutePath());
         final long start = System.currentTimeMillis();
         String lastSavedSrc = FileUtils.getOrCreateLastSavedSrc(formXml);
@@ -242,22 +233,6 @@ public class FormLoaderTask extends AsyncTask<String, String, FormLoaderTask.FEC
             Timber.i("Loaded in %.3f seconds.",
                     (System.currentTimeMillis() - start) / 1000F);
             formDef = formDefFromXml;
-=======
-        try {
-            Timber.i("Attempting to load from: %s", formXml.getAbsolutePath());
-            final long start = System.currentTimeMillis();
-            fis = new FileInputStream(formXml);
-            String lastSavedSrc = FileUtils.getOrCreateLastSavedSrc(formXml);
-            FormDef formDefFromXml = XFormUtils.getFormFromInputStream(fis, lastSavedSrc);
-            if (formDefFromXml == null) {
-                errorMsg = "Error reading XForm file";
-            } else {
-                Timber.i("Loaded in %.3f seconds.",
-                        (System.currentTimeMillis() - start) / 1000F);
-                formDef = formDefFromXml;
-
-                //FormDefCache.writeCache(formDef, formPath);
->>>>>>> 42fa08c24ef19a02fc8e6a722e322b4de4201f91
 
             try {
                 FormDefCache.writeCache(formDef, formXml.getPath());
@@ -316,6 +291,7 @@ public class FormLoaderTask extends AsyncTask<String, String, FormLoaderTask.FEC
 
         if (instancePath != null) {
             File instanceXml = new File(instancePath);
+
             // Use the savepoint file only if it's newer than the last manual save
             final File savepointFile = SaveFormToDisk.getSavepointFile(instanceXml.getName());
             if (savepointFile.exists()
@@ -325,6 +301,7 @@ public class FormLoaderTask extends AsyncTask<String, String, FormLoaderTask.FEC
                 Timber.w("Loading instance from savepoint file: %s",
                         savepointFile.getAbsolutePath());
             }
+
             if (instanceXml.exists()) {
                 // This order is important. Import data, then initialize.
                 try {
@@ -351,8 +328,6 @@ public class FormLoaderTask extends AsyncTask<String, String, FormLoaderTask.FEC
         } else {
             formDef.initialize(true, instanceInit);
         }
-
-
         return usedSavepoint;
     }
 

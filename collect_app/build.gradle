@@ -233,18 +233,9 @@ dependencies {
     implementation "com.evernote:android-job:1.4.2"
     implementation "com.rarepebble:colorpicker:3.0.1"
     implementation "commons-io:commons-io:2.6"
-<<<<<<< HEAD
     implementation "net.sf.opencsv:opencsv:2.4"
     implementation("org.opendatakit:opendatakit-javarosa:2.17.0") {
         exclude group: 'joda-time'
-=======
-    implementation "net.sf.kxml:kxml2:2.3.0"
-    implementation "net.sf.opencsv:opencsv:2.3"
-    //implementation("org.opendatakit:opendatakit-javarosa:2.15.1") {
-    implementation(project(':javarosa')) {
-
-            exclude group: 'joda-time'
->>>>>>> 42fa08c24ef19a02fc8e6a722e322b4de4201f91
         exclude group: 'org.slf4j'
     }
     implementation "com.karumi:dexter:6.0.1"
@@ -354,6 +345,3 @@ dependencies {
 // Must be at bottom to prevent dependency collisions
 // https://developers.google.com/android/guides/google-services-plugin
 apply plugin: 'com.google.gms.google-services'
-
-
-
