@@ -60,6 +60,7 @@ import org.odk.collect.android.storage.migration.StorageMigrationRepository;
 import org.odk.collect.android.storage.migration.StorageMigrationResult;
 import org.odk.collect.android.utilities.AdminPasswordProvider;
 import org.odk.collect.android.utilities.ApplicationConstants;
+import org.odk.collect.android.utilities.MultiClickGuard;
 import org.odk.collect.android.utilities.DialogUtils;
 import org.odk.collect.android.utilities.PlayServicesUtil;
 import org.odk.collect.android.utilities.SharedPreferencesUtils;
@@ -136,6 +137,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
 
     @Inject
     AdminPasswordProvider adminPasswordProvider;
+
     private MainMenuViewModel viewModel;
 
     @Override
@@ -159,7 +161,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         enterDataButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Collect.allowClick(getClass().getName())) {
+                if (MultiClickGuard.allowClick(getClass().getName())) {
                     Intent i = new Intent(getApplicationContext(),
                             FormChooserListActivity.class);
                     startActivity(i);
@@ -173,7 +175,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         reviewDataButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Collect.allowClick(getClass().getName())) {
+                if (MultiClickGuard.allowClick(getClass().getName())) {
                     Intent i = new Intent(getApplicationContext(), InstanceChooserList.class);
                     i.putExtra(ApplicationConstants.BundleKeys.FORM_MODE,
                             ApplicationConstants.FormModes.EDIT_SAVED);
@@ -188,7 +190,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         sendDataButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Collect.allowClick(getClass().getName())) {
+                if (MultiClickGuard.allowClick(getClass().getName())) {
                     Intent i = new Intent(getApplicationContext(),
                             InstanceUploaderListActivity.class);
                     startActivity(i);
@@ -201,7 +203,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         viewSentFormsButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Collect.allowClick(getClass().getName())) {
+                if (MultiClickGuard.allowClick(getClass().getName())) {
                     Intent i = new Intent(getApplicationContext(), InstanceChooserList.class);
                     i.putExtra(ApplicationConstants.BundleKeys.FORM_MODE,
                             ApplicationConstants.FormModes.VIEW_SENT);
@@ -216,7 +218,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         getFormsButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Collect.allowClick(getClass().getName())) {
+                if (MultiClickGuard.allowClick(getClass().getName())) {
                     SharedPreferences sharedPreferences = PreferenceManager
                             .getDefaultSharedPreferences(MainMenuActivity.this);
                     String protocol = sharedPreferences.getString(
@@ -232,7 +234,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
                         }
                     } else {
                         i = new Intent(getApplicationContext(),
-                                FormDownloadList.class);
+                                FormDownloadListActivity.class);
                     }
                     startActivity(i);
                 }
@@ -245,7 +247,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         manageFilesButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Collect.allowClick(getClass().getName())) {
+                if (MultiClickGuard.allowClick(getClass().getName())) {
                     Intent i = new Intent(getApplicationContext(),
                             FileManagerTabs.class);
                     startActivity(i);
@@ -316,63 +318,11 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
     }
 
     private void setButtonsVisibility() {
-        SharedPreferences sharedPreferences = this.getSharedPreferences(
-                AdminPreferencesActivity.ADMIN_PREFERENCES, 0);
-
-        boolean edit = sharedPreferences.getBoolean(AdminKeys.KEY_EDIT_SAVED, true);
-        if (!edit) {
-            if (reviewDataButton != null) {
-                reviewDataButton.setVisibility(View.GONE);
-            }
-        } else {
-            if (reviewDataButton != null) {
-                reviewDataButton.setVisibility(View.VISIBLE);
-            }
-        }
-
-        boolean send = sharedPreferences.getBoolean(AdminKeys.KEY_SEND_FINALIZED, true);
-        if (!send) {
-            if (sendDataButton != null) {
-                sendDataButton.setVisibility(View.GONE);
-            }
-        } else {
-            if (sendDataButton != null) {
-                sendDataButton.setVisibility(View.VISIBLE);
-            }
-        }
-
-        boolean viewSent = sharedPreferences.getBoolean(AdminKeys.KEY_VIEW_SENT, true);
-        if (!viewSent) {
-            if (viewSentFormsButton != null) {
-                viewSentFormsButton.setVisibility(View.GONE);
-            }
-        } else {
-            if (viewSentFormsButton != null) {
-                viewSentFormsButton.setVisibility(View.VISIBLE);
-            }
-        }
-
-        boolean getBlank = sharedPreferences.getBoolean(AdminKeys.KEY_GET_BLANK, true);
-        if (!getBlank) {
-            if (getFormsButton != null) {
-                getFormsButton.setVisibility(View.GONE);
-            }
-        } else {
-            if (getFormsButton != null) {
-                getFormsButton.setVisibility(View.VISIBLE);
-            }
-        }
-
-        boolean deleteSaved = sharedPreferences.getBoolean(AdminKeys.KEY_DELETE_SAVED, true);
-        if (!deleteSaved) {
-            if (manageFilesButton != null) {
-                manageFilesButton.setVisibility(View.GONE);
-            }
-        } else {
-            if (manageFilesButton != null) {
-                manageFilesButton.setVisibility(View.VISIBLE);
-            }
-        }
+        reviewDataButton.setVisibility(viewModel.shouldEditSavedFormButtonBeVisible() ? View.VISIBLE : View.GONE);
+        sendDataButton.setVisibility(viewModel.shouldSendFinalizedFormButtonBeVisible() ? View.VISIBLE : View.GONE);
+        viewSentFormsButton.setVisibility(viewModel.shouldViewSentFormButtonBeVisible() ? View.VISIBLE : View.GONE);
+        getFormsButton.setVisibility(viewModel.shouldGetBlankFormButtonBeVisible() ? View.VISIBLE : View.GONE);
+        manageFilesButton.setVisibility(viewModel.shouldDeleteSavedFormButtonBeVisible() ? View.VISIBLE : View.GONE);
     }
 
     @Override

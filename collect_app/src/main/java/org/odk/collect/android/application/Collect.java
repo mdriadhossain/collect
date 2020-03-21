@@ -19,10 +19,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -88,12 +85,8 @@ public class Collect extends Application {
     public static final String DEFAULT_FONTSIZE = "21";
     public static final int DEFAULT_FONTSIZE_INT = 21;
 
-    public static final int CLICK_DEBOUNCE_MS = 1000;
-
     public static String defaultSysLanguage;
     private static Collect singleton;
-    private static long lastClickTime;
-    private static String lastClickName;
 
     @Nullable
     private FormController formController;
@@ -159,20 +152,6 @@ public class Collect extends Application {
 
     public void setExternalDataManager(ExternalDataManager externalDataManager) {
         this.externalDataManager = externalDataManager;
-    }
-
-    /**
-     * Get a User-Agent string that provides the platform details followed by the application ID
-     * and application version name: {@code Dalvik/<version> (platform info) org.odk.collect.android/v<version>}.
-     *
-     * This deviates from the recommended format as described in https://github.com/opendatakit/collect/issues/3253.
-     */
-
-    public boolean isNetworkAvailable() {
-        ConnectivityManager manager = (ConnectivityManager) getInstance()
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo currentNetworkInfo = manager.getActiveNetworkInfo();
-        return currentNetworkInfo != null && currentNetworkInfo.isConnected();
     }
 
     /*
@@ -314,20 +293,6 @@ public class Collect extends Application {
     private void reloadSharedPreferences() {
         GeneralSharedPreferences.getInstance().reloadPreferences();
         AdminSharedPreferences.getInstance().reloadPreferences();
-    }
-
-    // Debounce multiple clicks within the same screen
-    public static boolean allowClick(String className) {
-        long elapsedRealtime = SystemClock.elapsedRealtime();
-        boolean isSameClass = className.equals(lastClickName);
-        boolean isBeyondThreshold = elapsedRealtime - lastClickTime > CLICK_DEBOUNCE_MS;
-        boolean isBeyondTestThreshold = lastClickTime == 0 || lastClickTime == elapsedRealtime; // just for tests
-        boolean allowClick = !isSameClass || isBeyondThreshold || isBeyondTestThreshold;
-        if (allowClick) {
-            lastClickTime = elapsedRealtime;
-            lastClickName = className;
-        }
-        return allowClick;
     }
 
     public AppDependencyComponent getComponent() {
