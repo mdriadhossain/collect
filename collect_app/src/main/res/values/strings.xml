@@ -157,7 +157,7 @@
     <string name="keep_changes">পরিবর্তন সংরক্ষণকরুন</string>
     <string name="change_formlist_url">/GetForms/index.php</string>
     <string name="change_protocol">Platform</string>
-    <string name="change_submission_url">Submission path</string>
+    <string name="change_submission_url">/Main/submission.php</string>
     <string name="formlist_url">Form list path</string>
     <string name="submission_url">Submission path</string>
     <string name="font_size">Font Size</string>

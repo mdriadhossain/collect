@@ -154,7 +154,6 @@ import org.odk.collect.android.utilities.ToastUtils;
 import org.odk.collect.android.widgets.DateTimeWidget;
 import org.odk.collect.android.widgets.QuestionWidget;
 import org.odk.collect.android.widgets.RangeWidget;
-import org.odk.collect.android.widgets.StringWidget;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -185,6 +184,8 @@ import static org.odk.collect.android.preferences.AdminKeys.KEY_MOVING_BACKWARDS
 import static org.odk.collect.android.preferences.GeneralKeys.KEY_BACKGROUND_LOCATION;
 import static org.odk.collect.android.utilities.AnimationUtils.areAnimationsEnabled;
 import static org.odk.collect.android.utilities.ApplicationConstants.RequestCodes;
+import static org.odk.collect.android.utilities.DialogUtils.getDialog;
+import static org.odk.collect.android.utilities.DialogUtils.showIfNotShowing;
 import static org.odk.collect.android.utilities.PermissionUtils.areStoragePermissionsGranted;
 import static org.odk.collect.android.utilities.PermissionUtils.finishAllActivities;
 import static org.odk.collect.android.utilities.ToastUtils.showLongToast;
@@ -413,8 +414,7 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
         identityPromptViewModel = ViewModelProviders.of(this).get(IdentityPromptViewModel.class);
         identityPromptViewModel.requiresIdentityToContinue().observe(this, requiresIdentity -> {
             if (requiresIdentity) {
-                IdentifyUserPromptDialogFragment dialog = IdentifyUserPromptDialogFragment.create(getFormController().getFormTitle());
-                DialogUtils.showIfNotShowing(dialog, getSupportFragmentManager());
+                showIfNotShowing(IdentifyUserPromptDialogFragment.class, getSupportFragmentManager());
             }
         });
         identityPromptViewModel.isFormEntryCancelled().observe(this, isFormEntryCancelled -> {
@@ -428,7 +428,7 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
                 .of(this, changesReasonViewModelFactory)
                 .get(FormSaveViewModel.class);
 
-        formSaveViewModel.getSavedResult().observe(this, this::handleSaveResult);
+        formSaveViewModel.getSaveResult().observe(this, this::handleSaveResult);
     }
 
     private void setupFields(Bundle savedInstanceState) {
@@ -486,13 +486,13 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
             if (!newForm) {
                 if (getFormController() != null) {
                     FormController formController = getFormController();
-                    identityPromptViewModel.setAuditEventLogger(formController.getAuditEventLogger());
+                    identityPromptViewModel.setFormController(formController);
                     formSaveViewModel.setFormController(formController);
                     refreshCurrentView();
                 } else {
                     Timber.w("Reloading form and restoring state.");
                     formLoaderTask = new FormLoaderTask(instancePath, startingXPath, waitingXPath);
-                    DialogUtils.showIfNotShowing(FormLoadingDialogFragment.newInstance(), getSupportFragmentManager());
+                    showIfNotShowing(FormLoadingDialogFragment.class, getSupportFragmentManager());
                     formLoaderTask.execute(formPath);
                 }
                 return;
@@ -627,7 +627,7 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
         }
 
         formLoaderTask = new FormLoaderTask(instancePath, null, null);
-        DialogUtils.showIfNotShowing(FormLoadingDialogFragment.newInstance(), getSupportFragmentManager());
+        showIfNotShowing(FormLoadingDialogFragment.class, getSupportFragmentManager());
         formLoaderTask.execute(formPath);
     }
 
@@ -667,6 +667,7 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
     private FormController getFormController() {
         return Collect.getInstance().getFormController();
     }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -1118,28 +1119,10 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
         if (item.getItemId() == DELETE_REPEAT) {
             createDeleteRepeatConfirmDialog();
         } else {
-            /*
-             * We don't have the right view here, so we store the View's ID as the
-             * item ID and loop through the possible views to find the one the user
-             * clicked on.
-             */
-            boolean shouldClearDialogBeShown;
             ODKView odkView = getCurrentViewIfODKView();
             if (odkView != null) {
                 for (QuestionWidget qw : odkView.getWidgets()) {
-                    shouldClearDialogBeShown = false;
-                    if (qw instanceof StringWidget) {
-                        for (int i = 0; i < qw.getChildCount(); i++) {
-                            if (item.getItemId() == qw.getChildAt(i).getId()) {
-                                shouldClearDialogBeShown = true;
-                                break;
-                            }
-                        }
-                    } else if (item.getItemId() == qw.getId()) {
-                        shouldClearDialogBeShown = true;
-                    }
-
-                    if (shouldClearDialogBeShown) {
+                    if (item.getItemId() == qw.getId()) {
                         createClearDialog(qw);
                         break;
                     }
@@ -1834,24 +1817,15 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
         if (result == null) {
             return;
         }
+
         switch (result.getState()) {
             case CHANGE_REASON_REQUIRED:
-                ChangesReasonPromptDialogFragment dialog = ChangesReasonPromptDialogFragment.create(getFormController().getFormTitle());
-                DialogUtils.showIfNotShowing(dialog, getSupportFragmentManager());
+                showIfNotShowing(ChangesReasonPromptDialogFragment.class, getSupportFragmentManager());
                 break;
 
             case SAVING:
                 autoSaved = true;
-
-                SaveFormProgressDialogFragment progressDialog = DialogUtils.showIfNotShowing(
-                        new SaveFormProgressDialogFragment(),
-                        getSupportFragmentManager()
-                );
-
-                if (result.getMessage() != null) {
-                    progressDialog.setMessage(getString(R.string.please_wait) + "\n\n" + result.getMessage());
-                }
-
+                showIfNotShowing(SaveFormProgressDialogFragment.class, getSupportFragmentManager());
                 break;
 
             case SAVED:
@@ -2399,7 +2373,7 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
 
                 if (formController.getInstanceFile() == null) {
                     createInstanceDirectory(formController);
-                    identityPromptViewModel.setAuditEventLogger(formController.getAuditEventLogger());
+                    identityPromptViewModel.setFormController(formController);
                     formSaveViewModel.setFormController(formController);
 
                     identityPromptViewModel.requiresIdentityToContinue().observe(this, requiresIdentity -> {
@@ -2416,7 +2390,7 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
                         // we've just loaded a saved form, so start in the hierarchy view
                         String formMode = reqIntent.getStringExtra(ApplicationConstants.BundleKeys.FORM_MODE);
                         if (formMode == null || ApplicationConstants.FormModes.EDIT_SAVED.equalsIgnoreCase(formMode)) {
-                            identityPromptViewModel.setAuditEventLogger(formController.getAuditEventLogger());
+                            identityPromptViewModel.setFormController(formController);
                             formSaveViewModel.setFormController(formController);
 
                             identityPromptViewModel.requiresIdentityToContinue().observe(this, requiresIdentity -> {
@@ -2449,7 +2423,7 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
                             finish();
                         }
                     } else {
-                        identityPromptViewModel.setAuditEventLogger(formController.getAuditEventLogger());
+                        identityPromptViewModel.setFormController(formController);
                         formSaveViewModel.setFormController(formController);
 
                         identityPromptViewModel.requiresIdentityToContinue().observe(this, requiresIdentity -> {
@@ -2519,10 +2493,12 @@ public class FormEntryActivity extends CollectAbstractActivity implements Animat
     }
 
     public void onProgressStep(String stepMessage) {
-        DialogUtils.showIfNotShowing(
-                new FormLoadingDialogFragment(),
-                getSupportFragmentManager()
-        ).setMessage(getString(R.string.please_wait) + "\n\n" + stepMessage);
+        showIfNotShowing(FormLoadingDialogFragment.class, getSupportFragmentManager());
+
+        FormLoadingDialogFragment dialog = getDialog(FormLoadingDialogFragment.class, getSupportFragmentManager());
+        if (dialog != null) {
+            dialog.setMessage(getString(R.string.please_wait) + "\n\n" + stepMessage);
+        }
     }
 
     public void next() {
