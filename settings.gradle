@@ -1,2 +1,2 @@
 include ':collect_app'
-include ':javarosa'
+include ':nbi-stubs'

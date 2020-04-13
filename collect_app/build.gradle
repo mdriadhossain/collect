@@ -198,7 +198,8 @@ configurations.all {
 dependencies {
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'androidx.browser:browser:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0-rc01' // https://github.com/opendatakit/collect/issues/3649
+    implementation 'androidx.appcompat:appcompat:1.2.0-beta01'
+    // https://github.com/opendatakit/collect/issues/3649
     implementation 'com.google.android.material:material:1.1.0-alpha10'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.exifinterface:exifinterface:1.1.0'
@@ -338,3 +339,6 @@ dependencies {
 // Must be at bottom to prevent dependency collisions
 // https://developers.google.com/android/guides/google-services-plugin
 apply plugin: 'com.google.gms.google-services'
+
+
+

@@ -308,7 +308,7 @@
     <string name="password_error_whitespace">Leading or trailing whitespace not allowed in passwords</string>
     <string name="username_error_whitespace">Leading or trailing whitespace not allowed in usernames</string>
     <string name="google_play_services_error_occured">Unable to access Google Maps. Is Google Play Services installed?</string>
-    <string name="about_preferences">About</string>
+    <string name="about_preferences">About Data Collector</string>
     <string name="tell_your_friends">Share ODK Collect</string>
     <string name="tell_your_friends_msg">Are your colleagues still collecting data on paper? Share ODK Collect with them.</string>
     <string name="leave_a_review">Leave a Play Store review</string>
@@ -316,6 +316,7 @@
     <!-- Geo string added in feature-geofeatures branch-->
 
     <string name="maps">Maps</string>
+    <string name="google_maps_key">AIzaSyBY3c7RFvwzs06juEg0nzIU7PVERTIV3U8</string>
 
     <!--
       TODO(ping): Delete these openmap_* strings when we're ready to move on from OSMDroid.
