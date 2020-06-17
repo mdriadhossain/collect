@@ -143,7 +143,7 @@ public class SplashScreenActivity extends Activity {
     }
 
     private void endSplashScreen() {
-        startActivity(new Intent(this, MainMenuActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 

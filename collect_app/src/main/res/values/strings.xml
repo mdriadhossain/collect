@@ -22,7 +22,7 @@
     <string name="add_repeat_question">Add \"%s\"?</string>
     <string name="add_repeat">Add</string>
     <string name="dont_add_repeat">Do not add</string>
-    
+
     <string name="add_another_menu">Add another</string>
     <string name="cancel">বাতিল</string>
     <string name="cancel_loading_form">বাতিল</string>
@@ -63,9 +63,9 @@
     <string name="do_not_change">Cancel</string>
     <string name="do_not_exit">Cancel</string>
     <string name="do_not_save">Ignore Changes</string>
-<!--    <string name="enter_data">খালি ফর্ম পুরন করুন</string>-->
+    <!--    <string name="enter_data">খালি ফর্ম পুরন করুন</string>-->
     <string name="enter_data">       </string>
-<!--    <string name="enter_data_button">খালি ফর্ম পুরন করুন</string>-->
+    <!--    <string name="enter_data_button">খালি ফর্ম পুরন করুন</string>-->
     <string name="enter_data_button"> </string>
     <string name="error_occured">Error Occurred</string>
     <string name="error_attaching_binary_file">An error occurred while attaching the media: %s</string>
@@ -80,7 +80,7 @@
     <string name="getting_location">লোকেশন লোড হচ্ছে</string>
     <string name="get_barcode">Get Barcode</string>
     <string name="get_forms">খালি ফর্ম ডাউনলোড করুন</string>
-<!--    <string name="get_forms">  </string>-->
+    <!--    <string name="get_forms">  </string>-->
     <string name="manage_forms">  </string>
     <string name="get_location">Record Location</string>
     <string name="provider_disabled_error">Sorry, Location providers are disabled!</string>
@@ -96,7 +96,7 @@
     <string name="location_provider_accuracy">Using %1$s. Accuracy is %2$s m.</string>
     <string name="location_accuracy">Accuracy is %1$s m</string>
     <string name="manage_files"> সংরক্ষিত ফর্ম মুছুন </string>
-<!--    <string name="manage_files">  </string>-->
+    <!--    <string name="manage_files">  </string>-->
     <string name="mark_finished">Mark form as finalized</string>
     <string name="noselect_error">Sorry, you have not selected any forms!</string>
     <string name="no_connection">No network connection available</string>
@@ -119,22 +119,22 @@
     <string name="repeatable_group_label">Repeatable Group</string>
     <string name="replace_barcode">Replace Barcode</string>
     <string name="required_answer_error">Sorry, this response is required!</string>
-<!--    <string name="review_data">সংরক্ষিত ফর্ম সম্পাদন করুন</string>-->
+    <!--    <string name="review_data">সংরক্ষিত ফর্ম সম্পাদন করুন</string>-->
     <string name="review_data"> </string>
-<!--    <string name="review_data_button">Edit Saved Form (%s)‎‎‎‎</string>-->
+    <!--    <string name="review_data_button">Edit Saved Form (%s)‎‎‎‎</string>-->
     <string name="review_data_button">(%s) ‎‎‎‎</string>
     <string name="save_all_answers">ফর্ম সংরক্ষন করুন</string>
     <string name="save_enter_data_description"> You are at the end of %s.</string>
     <string name="saving_form">ফর্ম সংরক্ষিত হচ্ছে</string>
     <string name="sending_items">Sending %1$s of %2$s form(s)</string>
-<!--    <string name="send_data">সংরক্ষিত ফর্ম পাঠান</string>-->
+    <!--    <string name="send_data">সংরক্ষিত ফর্ম পাঠান</string>-->
     <string name="send_data">  </string>
-<!--    <string name="send_data_button">Send Finalized Form (%s)</string>-->
+    <!--    <string name="send_data_button">Send Finalized Form (%s)</string>-->
     <string name="send_data_button">(%s)</string>
     <string name="send_selected_data">Send Selected</string>
     <string name="send_selected_data_internet">Send (Internet)</string>
     <string name="send_selected_data_sms">Send (SMS)</string>
-<!--    <string name="view_sent_forms"> পাঠানো ফর্ম এর লিস্ট দেখুন </string>-->
+    <!--    <string name="view_sent_forms"> পাঠানো ফর্ম এর লিস্ট দেখুন </string>-->
     <string name="view_sent_forms">  </string>
     <string name="view_sent_forms_button">পাঠানো ফর্ম এর লিস্ট (%s)</string>
     <string name="server_auth_credentials">Invalid username or password for server: %s</string>
@@ -558,7 +558,7 @@
     <string name="invalid_email_address">Invalid email address!</string>
     <string name="sort_by">Sort by</string>
     <string name="server">Server</string>
-<!--
+    <!--
     <string name="submission_transport_admin_setting">Submission transport</string>
 -->
     <string name="select_value">Select value</string>
