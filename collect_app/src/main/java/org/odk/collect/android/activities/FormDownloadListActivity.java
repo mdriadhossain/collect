@@ -54,6 +54,7 @@ import org.odk.collect.android.utilities.DialogUtils;
 import org.odk.collect.android.utilities.FormListDownloader;
 import org.odk.collect.android.utilities.PermissionUtils;
 import org.odk.collect.android.utilities.ToastUtils;
+import org.odk.collect.android.utilities.UidGlobal;
 import org.odk.collect.android.utilities.WebCredentialsUtils;
 
 import java.net.URI;
@@ -62,6 +63,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -118,6 +120,9 @@ public class FormDownloadListActivity extends FormListActivity implements FormLi
 
     private FormDownloadListViewModel viewModel;
 
+    //UidGlobal userIDGlobal = UidGlobal.getInstance();
+   // int globalUserID = 0;
+
     @Inject
     WebCredentialsUtils webCredentialsUtils;
 
@@ -135,6 +140,9 @@ public class FormDownloadListActivity extends FormListActivity implements FormLi
 
         setContentView(R.layout.form_download_list);
         setTitle(getString(R.string.get_forms));
+
+        //Intent intent = getIntent();
+       // globalUserID = Integer.parseInt(Objects.requireNonNull(intent.getStringExtra("globalUserID")));
 
         viewModel = ViewModelProviders.of(this).get(FormDownloadListViewModel.class);
 

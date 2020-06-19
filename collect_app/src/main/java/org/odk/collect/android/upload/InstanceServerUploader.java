@@ -20,6 +20,8 @@ import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
 
 import org.odk.collect.android.R;
+import org.odk.collect.android.activities.AndroidTutorialApp;
+import org.odk.collect.android.activities.DowloadedFormID;
 import org.odk.collect.android.application.Collect;
 import org.odk.collect.android.instances.Instance;
 import org.odk.collect.android.openrosa.CaseInsensitiveHeaders;
@@ -278,8 +280,13 @@ public class InstanceServerUploader extends InstanceUploader {
         }
 
         // add deviceID to request
+        String userid = new Integer(AndroidTutorialApp.uid).toString();
+        String formid = new Integer(DowloadedFormID.frmid).toString();
         try {
             urlString += "?deviceID=" + URLEncoder.encode(deviceId != null ? deviceId : "", "UTF-8");
+            urlString += "?UserID=" + userid;
+            urlString += "?FormID=" + formid;
+            //urlString = "http://ecds.solversbd.com/Main/submission.php?deviceID=352317057029961?UserID=467?FormID=106";
         } catch (UnsupportedEncodingException e) {
             Timber.i(e, "Error encoding URL for device id : %s", deviceId);
         }

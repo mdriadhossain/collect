@@ -25,6 +25,8 @@ import org.javarosa.core.reference.RootTranslator;
 import org.javarosa.xform.parse.XFormParser;
 import org.kxml2.kdom.Element;
 import org.odk.collect.android.R;
+import org.odk.collect.android.activities.AndroidTutorialApp;
+import org.odk.collect.android.activities.DowloadedFormID;
 import org.odk.collect.android.application.Collect;
 import org.odk.collect.android.dao.FormsDao;
 import org.odk.collect.android.listeners.FormDownloaderListener;
@@ -146,6 +148,11 @@ public class FormDownloader {
             // get the xml file
             // if we've downloaded a duplicate, this gives us the file
             fileResult = downloadXform(fd.getFormName(), fd.getDownloadUrl());
+
+            Uri uri = Uri.parse(fd.getDownloadUrl());
+            String frmID = uri.getQueryParameter("formId");
+            DowloadedFormID.frmid= Integer.parseInt(frmID);
+            Timber.i(frmID);
 
             if (fd.getManifestUrl() != null) {
                 finalMediaPath = FileUtils.constructMediaPath(

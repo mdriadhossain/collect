@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import org.javarosa.xform.parse.XFormParser;
 import org.kxml2.kdom.Element;
 import org.odk.collect.android.R;
+import org.odk.collect.android.activities.AndroidTutorialApp;
 import org.odk.collect.android.dao.FormsDao;
 import org.odk.collect.android.openrosa.OpenRosaAPIClient;
 import org.odk.collect.android.logic.FormDetails;
@@ -42,6 +43,8 @@ import java.util.List;
 
 import timber.log.Timber;
 
+import static android.content.Context.MODE_APPEND;
+
 public class FormListDownloader {
 
     // used to store error message if one occurs
@@ -55,6 +58,7 @@ public class FormListDownloader {
     private final OpenRosaAPIClient openRosaAPIClient;
     private final Application application;
     private final FormsDao formsDao;
+    String globalUserID = "";
 
     public FormListDownloader(
             Application application,
@@ -73,8 +77,7 @@ public class FormListDownloader {
 
     public HashMap<String, FormDetails> downloadFormList(@Nullable String url, @Nullable String username,
                                                          @Nullable String password, boolean alwaysCheckMediaFiles) {
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(
-                application);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(application);
 
         String downloadListUrl = url != null ? url :
                 settings.getString(GeneralKeys.KEY_SERVER_URL,
@@ -92,7 +95,11 @@ public class FormListDownloader {
         String downloadPath = (url != null) ?
                 formListUrl : settings.getString(GeneralKeys.KEY_FORMLIST_URL, formListUrl);
 
+        String suid = new Integer(AndroidTutorialApp.uid).toString();
+
         downloadListUrl += downloadPath;
+        downloadListUrl += "?UserID=";
+        downloadListUrl += suid;
 
         // We populate this with available forms from the specified server.
         // <formname, details>
@@ -185,9 +192,11 @@ public class FormListDownloader {
                         continue;
                     }
                     String tag = child.getName();
+                    Timber.d(tag);
                     switch (tag) {
                         case "formID":
                             formId = XFormParser.getXMLText(child, true);
+                            Timber.d(formId);
                             if (formId != null && formId.length() == 0) {
                                 formId = null;
                             }

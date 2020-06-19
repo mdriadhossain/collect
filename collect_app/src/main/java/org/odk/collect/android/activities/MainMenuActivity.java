@@ -31,6 +31,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -75,6 +76,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.lang.ref.WeakReference;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -111,6 +113,8 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
     private Cursor viewSentCursor;
     private final IncomingHandler handler = new IncomingHandler(this);
     private final MyContentObserver contentObserver = new MyContentObserver();
+
+    //String globalUserID = "";
 
     @Inject
     public Analytics analytics;
@@ -151,6 +155,11 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         setContentView(R.layout.main_menu);
         ButterKnife.bind(this);
         viewModel = ViewModelProviders.of(this, new MainMenuViewModel.Factory()).get(MainMenuViewModel.class);
+
+        //Intent intent = getIntent();
+        //globalUserID = intent.getStringExtra("globalUserID");
+
+       // Toast.makeText(MainMenuActivity.this, "Global User ID: " + globalUserID, Toast.LENGTH_LONG).show();
 
         initToolbar();
         DaggerUtils.getComponent(this).inject(this);
@@ -240,6 +249,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
                         i = new Intent(getApplicationContext(),
                                 FormDownloadListActivity.class);
                     }
+                   // i.putExtra("UserGlobalID", globalUserID);
                     startActivity(i);
                 }
             }
