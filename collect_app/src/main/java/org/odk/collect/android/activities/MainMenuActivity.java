@@ -153,13 +153,9 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         super.onCreate(savedInstanceState);
         Collect.getInstance().getComponent().inject(this);
         setContentView(R.layout.main_menu);
+        setTitle(R.string.app_name);
         ButterKnife.bind(this);
         viewModel = ViewModelProviders.of(this, new MainMenuViewModel.Factory()).get(MainMenuViewModel.class);
-
-        //Intent intent = getIntent();
-        //globalUserID = intent.getStringExtra("globalUserID");
-
-       // Toast.makeText(MainMenuActivity.this, "Global User ID: " + globalUserID, Toast.LENGTH_LONG).show();
 
         initToolbar();
         DaggerUtils.getComponent(this).inject(this);
@@ -167,6 +163,22 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         disableSmsIfNeeded();
 
         storageMigrationRepository.getResult().observe(this, this::onStorageMigrationFinish);
+
+        Button btnLogout = findViewById(R.id.btn_logout);
+
+        btnLogout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences myPrefs = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = myPrefs.edit();
+                editor.clear();
+                editor.apply();
+                Intent intent = new Intent(MainMenuActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();  // This call is missing.
+            }
+        });
+
 
         // enter data button. expects a result.
         Button enterDataButton = findViewById(R.id.enter_data);
@@ -363,7 +375,8 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        qrcodeScannerMenuItem.setVisible(this.getSharedPreferences(AdminPreferencesActivity.ADMIN_PREFERENCES, 0).getBoolean(AdminKeys.KEY_QR_CODE_SCANNER, true));
+        //qrcodeScannerMenuItem.setVisible(this.getSharedPreferences(AdminPreferencesActivity.ADMIN_PREFERENCES, 0).getBoolean(AdminKeys.KEY_QR_CODE_SCANNER, true));
+        qrcodeScannerMenuItem.setVisible(false);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -402,7 +415,10 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
 
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setTitle(String.format("%s %s", getString(R.string.app_name), viewModel.getVersion()));
+        //setTitle(String.format("%s %s", getString(R.string.app_name), viewModel.getVersion()));
+        //setTitle(String.format("%s %s", getString(R.string.app_name), ""));
+        setTitle(R.string.app_name);
+
         setSupportActionBar(toolbar);
     }
 

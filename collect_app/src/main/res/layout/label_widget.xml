@@ -13,7 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@id/center"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="MissingClass,RtlHardcoded" />
 
     <FrameLayout
         android:id="@+id/help_text"

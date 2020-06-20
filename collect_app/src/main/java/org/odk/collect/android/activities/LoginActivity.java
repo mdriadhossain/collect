@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -12,7 +13,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -37,12 +40,18 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private EditText pass;
     private Button mSubmit;
     private Button  mRegister;
+    private CheckBox saveLoginCheckBox;
+
     // Progress Dialog
     private ProgressDialog pDialog;
 
     // JSON parser class
     JSONParser jsonParser = new JSONParser();
     private Application application;
+
+    private SharedPreferences loginPreferences;
+    private SharedPreferences.Editor loginPrefsEditor;
+    private Boolean saveLogin;
 
 
     // JSON element ids from repsonse of php script:
@@ -53,12 +62,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle("Data Collection System");
+        setTitle(R.string.app_name);
 
         // setup input fields
         user = (EditText) findViewById(R.id.username);
         //user.setCompoundDrawables(null, null, getResources().getDrawable(R.drawable.edit), null);
         pass = (EditText) findViewById(R.id.password);
+
+        saveLoginCheckBox = (CheckBox)findViewById(R.id.saveLoginCheckBox);
+        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        loginPrefsEditor = loginPreferences.edit();
 
         // setup buttons
         mSubmit = (Button) findViewById(R.id.login);
@@ -68,6 +81,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         // register listeners
         mSubmit.setOnClickListener(this);
         mRegister.setOnClickListener(this);
+
+        saveLogin = loginPreferences.getBoolean("saveLogin", false);
+        if (saveLogin == true) {
+            user.setText(loginPreferences.getString("username", ""));
+            pass.setText(loginPreferences.getString("password", ""));
+            saveLoginCheckBox.setChecked(true);
+        }
     }
 
     @Override
@@ -84,7 +104,24 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
                 // if connected with internet
                 // Toast.makeText(this, "Connected to Internet", Toast.LENGTH_LONG).show();
-                new AttemptLogin().execute();
+
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(user.getWindowToken(), 0);
+
+                    String username = user.getText().toString();
+                    String password = pass.getText().toString();
+
+                    if (saveLoginCheckBox.isChecked()) {
+                        loginPrefsEditor.putBoolean("saveLogin", true);
+                        loginPrefsEditor.putString("username", username);
+                        loginPrefsEditor.putString("password", password);
+                        loginPrefsEditor.commit();
+                    } else {
+                        loginPrefsEditor.clear();
+                        loginPrefsEditor.commit();
+                    }
+
+                    new AttemptLogin().execute();
             }
 
             else if (

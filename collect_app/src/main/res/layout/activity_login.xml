@@ -14,31 +14,34 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="0dp"
         android:gravity="center"
         android:orientation="vertical">
-        <TextView
+        <!--<TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="ব্যবহারকারীর নাম"
-            android:textSize="18dp" />
+            android:text="@string/bn_username"
+            android:textSize="18dp" />-->
         <EditText
             android:id="@+id/username"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="0dp"
             android:layout_marginRight="25dp"
+            android:textColor="#FFF"
+            android:hint="@string/bn_username"
+            android:textColorHint="@color/browser_actions_text_color"
             android:ems="10" />
-        <TextView
+        <!--<TextView
             android:id="@+id/textView01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="পাসওয়ার্ড"
-            android:textSize="18dp" />
+            android:text="@string/bn_password"
+            android:textSize="18dp" />-->
         <EditText
             android:id="@+id/password"
             android:layout_width="240dp"
@@ -46,8 +49,20 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="25dp"
+            android:hint="@string/bn_password"
+            android:textColorHint="@color/browser_actions_text_color"
             android:ems="10"
+            android:textColor="#FFF"
             android:inputType="textPassword" />
+
+        <CheckBox
+            android:id="@+id/saveLoginCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Remember Password?"
+            android:textColor="#FFF" />
+
         <Button
             android:id="@+id/login"
             android:layout_width="120dp"

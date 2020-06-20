@@ -10,7 +10,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="?colorSurface">
 
@@ -25,13 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/notes"
-            tools:title="Data Collector" />
+            tools:title="@string/app_name" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -46,7 +46,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/margin_standard"
                 android:paddingTop="@dimen/margin_small"
@@ -57,6 +57,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="460dp"
                     android:orientation="vertical">
+                    <Button
+                        android:id="@+id/btn_logout"
+                        android:layout_width="48dip"
+                        android:layout_height="48dip"
+                        android:layout_gravity="right"
+                        android:background="@drawable/power"
+                        android:padding="1dp"
+                        android:textSize="21dp" />
 
                     <Button
                         android:id="@+id/get_forms"
@@ -118,6 +126,7 @@
                         android:background="@drawable/delete"
                         android:padding="20dp"
                         android:textSize="21sp" />
+
 
 
                     <!--                    <com.google.android.material.button.MaterialButton-->
