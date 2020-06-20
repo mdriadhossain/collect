@@ -1,15 +1,16 @@
 package org.odk.collect.android.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 
 import android.app.Activity;
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 import org.odk.collect.android.R;
 import org.odk.collect.android.preferences.PreferencesActivity;
 import org.odk.collect.android.utilities.UidGlobal;
+import org.odk.collect.android.preferences.GeneralKeys;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     // JSON parser class
     JSONParser jsonParser = new JSONParser();
+    private Application application;
+
 
     // JSON element ids from repsonse of php script:
     private static final String TAG_SUCCESS = "success";
@@ -128,10 +132,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 params.add(new BasicNameValuePair("username", username));
                 params.add(new BasicNameValuePair("password", password));
 
-                //URL (Must be https://)
-                String LOGIN_URL = "http://ecds.solversbd.com/Lib/AppAuthChecker.php";
-                //String LOGIN_URL = "https://ecds.solversbd.com/Lib/AppAuthChecker.php";
+                //SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(application.getApplicationContext());
+
                 //String LOGIN_URL = "https://steptoonline.com/lib/AppAuthChecker.php";
+                //String LOGIN_URL = "http://ecds.solversbd.com/Lib/AppAuthChecker.php";
+                String LOGIN_URL = "http://data.solversbd.com/Lib/AppAuthChecker.php";
+
+                //String authCheckUrl = application.getString(R.string.default_odk_formlist);
+               // String authCheckUrl = "/Lib/AppAuthChecker.php";
+                //String LOGIN_URL = settings.getString(GeneralKeys.KEY_SERVER_URL, application.getString(R.string.default_server_url)) + authCheckUrl;
+
                 String REQUEST_METHOD = "POST";
 
                 Timber.d(username);
