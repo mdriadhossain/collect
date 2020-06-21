@@ -14,7 +14,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="30dp"
         android:gravity="center"
         android:orientation="vertical">
         <!--<TextView
@@ -79,7 +80,7 @@
         android:layout_width="48dip"
         android:layout_height="48dip"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:background="@drawable/set"
         android:padding="159dp"
         android:textSize="21dp" />

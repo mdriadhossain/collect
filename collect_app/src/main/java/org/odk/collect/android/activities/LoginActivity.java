@@ -62,7 +62,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setTitle(R.string.app_name);
+        //setTitle(R.string.app_name);
 
         // setup input fields
         user = (EditText) findViewById(R.id.username);
