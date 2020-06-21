@@ -1,6 +1,7 @@
 package org.odk.collect.android.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.app.Application;
@@ -8,19 +9,25 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.burgstaller.okhttp.digest.fromhttpclient.BasicNameValuePair;
 import com.burgstaller.okhttp.digest.fromhttpclient.NameValuePair;
+import com.google.android.material.internal.CheckableImageButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +49,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private Button  mRegister;
     private CheckBox saveLoginCheckBox;
 
+    private ImageView passShowHideImg;
+
     // Progress Dialog
     private ProgressDialog pDialog;
 
@@ -62,12 +71,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //setTitle(R.string.app_name);
+        setTitle(R.string.app_name);
 
         // setup input fields
         user = (EditText) findViewById(R.id.username);
-        //user.setCompoundDrawables(null, null, getResources().getDrawable(R.drawable.edit), null);
         pass = (EditText) findViewById(R.id.password);
+
+        passShowHideImg = findViewById(R.id.show_pass_btn);
 
         saveLoginCheckBox = (CheckBox)findViewById(R.id.saveLoginCheckBox);
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
@@ -87,6 +97,24 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             user.setText(loginPreferences.getString("username", ""));
             pass.setText(loginPreferences.getString("password", ""));
             saveLoginCheckBox.setChecked(true);
+        }
+    }
+
+    public void ShowHidePass(View view){
+        if(view.getId()==R.id.show_pass_btn){
+            if(pass.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())){
+                //passShowHideImg.setImageResource(R.drawable.hide_password);
+                passShowHideImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.hide_password));
+                //Show Password
+                pass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+            else{
+                //passShowHideImg.setImageResource(R.drawable.show_password);
+                passShowHideImg.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.show_password));
+                //Hide Password
+                pass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+            }
         }
     }
 

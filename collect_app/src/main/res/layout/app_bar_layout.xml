@@ -5,7 +5,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp">
+        android:elevation="2dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +13,7 @@
             style="@style/Widget.Collect.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/notes" />
+            app:navigationIcon="@mipmap/notes" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -169,10 +169,10 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         btnLogout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences myPrefs = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = myPrefs.edit();
-                editor.clear();
-                editor.apply();
+                //SharedPreferences myPrefs = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+                //SharedPreferences.Editor editor = myPrefs.edit();
+                //editor.clear();
+                //editor.apply();
                 Intent intent = new Intent(MainMenuActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();  // This call is missing.

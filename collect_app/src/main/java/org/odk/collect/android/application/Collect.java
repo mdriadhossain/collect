@@ -251,7 +251,6 @@ public class Collect extends Application {
         if (mgr.getSingularProperty(PROPMGR_USERNAME) == null || mgr.getSingularProperty(PROPMGR_USERNAME).isEmpty()) {
             mgr.putProperty(PROPMGR_USERNAME, SCHEME_USERNAME, (String) GeneralSharedPreferences.getInstance().get(KEY_USERNAME));
         }
-
         FormController.initializeJavaRosa(mgr);
     }
 

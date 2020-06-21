@@ -124,7 +124,8 @@
     <!--    <string name="review_data">সংরক্ষিত ফর্ম সম্পাদন করুন</string>-->
     <string name="review_data"> </string>
     <!--    <string name="review_data_button">Edit Saved Form (%s)‎‎‎‎</string>-->
-    <string name="review_data_button">(%s) ‎‎‎‎</string>
+    <!--<string name="review_data_button">(%s) ‎‎‎‎</string>-->
+    <string name="review_data_button"> ‎‎‎‎</string>
     <string name="save_all_answers">ফর্ম সংরক্ষন করুন</string>
     <string name="save_enter_data_description"> You are at the end of %s.</string>
     <string name="saving_form">ফর্ম সংরক্ষিত হচ্ছে</string>
@@ -133,7 +134,8 @@
     <string name="send_data">  </string>
     <!--    <string name="send_data_button">Send Finalized Form (%s)</string>-->
     <string name="send_data_button">(%s)</string>
-    <string name="send_selected_data">Send Selected</string>
+    <!--<string name="send_selected_data">Send Selected</string>-->
+    <string name="send_selected_data"></string>
     <string name="send_selected_data_internet">Send (Internet)</string>
     <string name="send_selected_data_sms">Send (SMS)</string>
     <!--    <string name="view_sent_forms"> পাঠানো ফর্ম এর লিস্ট দেখুন </string>-->
