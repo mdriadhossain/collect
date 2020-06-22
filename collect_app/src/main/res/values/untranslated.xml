@@ -16,9 +16,10 @@ the specific language governing permissions and limitations under the License. -
 <!--    <string name="default_odk_formlist" translatable="false">/formList</string>-->
 <!--    <string name="default_odk_submission" translatable="false">/submission</string>-->
 
-    <string name="default_server_url" translatable="false">http://ecds.solversbd.com</string>
+    <string name="default_server_url" translatable="false">http://data.solversbd.com</string>
     <string name="default_odk_formlist" translatable="false">/GetForms/index.php</string>
     <string name="default_odk_submission" translatable="false">/Main/submission.php</string>
+    <string name="default_odk_authchecker" translatable="false">/Lib/AppAuthChecker.php</string>
 
     <string name="transport_type_value_internet" translatable="false">internet</string>
     <string name="transport_type_value_sms" translatable="false">sms</string>

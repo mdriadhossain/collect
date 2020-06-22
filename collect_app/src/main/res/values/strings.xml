@@ -130,12 +130,12 @@
     <string name="save_enter_data_description"> You are at the end of %s.</string>
     <string name="saving_form">ফর্ম সংরক্ষিত হচ্ছে</string>
     <string name="sending_items">Sending %1$s of %2$s form(s)</string>
-    <!--    <string name="send_data">সংরক্ষিত ফর্ম পাঠান</string>-->
-    <string name="send_data">  </string>
+    <!--<string name="send_data">সংরক্ষিত ফর্ম পাঠান</string>-->
+    <string name="send_data"></string>
     <!--    <string name="send_data_button">Send Finalized Form (%s)</string>-->
-    <string name="send_data_button">(%s)</string>
-    <!--<string name="send_selected_data">Send Selected</string>-->
-    <string name="send_selected_data"></string>
+    <string name="send_data_button"></string>
+    <string name="send_selected_data">Send Selected</string>
+    <!--<string name="send_selected_data"></string>-->
     <string name="send_selected_data_internet">Send (Internet)</string>
     <string name="send_selected_data_sms">Send (SMS)</string>
     <!--    <string name="view_sent_forms"> পাঠানো ফর্ম এর লিস্ট দেখুন </string>-->

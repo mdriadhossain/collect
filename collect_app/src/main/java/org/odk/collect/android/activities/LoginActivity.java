@@ -197,18 +197,25 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 params.add(new BasicNameValuePair("username", username));
                 params.add(new BasicNameValuePair("password", password));
 
-                //SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(application.getApplicationContext());
-
-                //String LOGIN_URL = "https://steptoonline.com/lib/AppAuthChecker.php";
                 //String LOGIN_URL = "http://ecds.solversbd.com/Lib/AppAuthChecker.php";
-                String LOGIN_URL = "http://data.solversbd.com/Lib/AppAuthChecker.php";
+                //String LOGIN_URL = "http://data.solversbd.com/Lib/AppAuthChecker.php";
+                // String authCheckUrl = "/Lib/AppAuthChecker.php";
 
-                //String authCheckUrl = application.getString(R.string.default_odk_formlist);
-               // String authCheckUrl = "/Lib/AppAuthChecker.php";
-                //String LOGIN_URL = settings.getString(GeneralKeys.KEY_SERVER_URL, application.getString(R.string.default_server_url)) + authCheckUrl;
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                String mainServerURL = settings.getString(GeneralKeys.KEY_SERVER_URL, getApplication().getString(R.string.default_server_url));
+
+                while (mainServerURL.endsWith("/")) {
+                    mainServerURL = mainServerURL.substring(0, mainServerURL.length() - 1);
+                }
+
+                String authCheckUrl = getResources().getString(R.string.default_odk_authchecker);
+
+                String LOGIN_URL = mainServerURL + authCheckUrl;
 
                 String REQUEST_METHOD = "POST";
 
+                //Timber.d(mainServerURL);
+                //Timber.d(authCheckUrl);
                 Timber.d(username);
                 Timber.d(password);
                 Timber.d(LOGIN_URL);
