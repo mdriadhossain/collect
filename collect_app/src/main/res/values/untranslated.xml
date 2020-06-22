@@ -7,7 +7,7 @@ OR CONDITIONS OF ANY KIND, either express or implied. See the License for
 the specific language governing permissions and limitations under the License. -->
 <resources>
     <!-- strings that should not be translated -->
-    <string name="app_name" translatable="false">BDRS Data Collector</string>
+    <string name="app_name" translatable="false">BDRS HouseHold Listing Application</string>
     <string name="protocol_odk_default" translatable="false">solvers_default</string>
     <string name="protocol_google_sheets" translatable="false">google_sheets</string>
     <string name="protocol_other" translatable="false">other_protocol</string>
