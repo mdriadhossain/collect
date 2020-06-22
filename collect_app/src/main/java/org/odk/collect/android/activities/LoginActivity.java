@@ -203,15 +203,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                 SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                 String mainServerURL = settings.getString(GeneralKeys.KEY_SERVER_URL, getApplication().getString(R.string.default_server_url));
-
                 while (mainServerURL.endsWith("/")) {
                     mainServerURL = mainServerURL.substring(0, mainServerURL.length() - 1);
                 }
-
                 String authCheckUrl = getResources().getString(R.string.default_odk_authchecker);
 
                 String LOGIN_URL = mainServerURL + authCheckUrl;
-
                 String REQUEST_METHOD = "POST";
 
                 //Timber.d(mainServerURL);
