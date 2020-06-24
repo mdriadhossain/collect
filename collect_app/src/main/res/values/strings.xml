@@ -125,7 +125,7 @@
     <string name="review_data"> </string>
     <!--    <string name="review_data_button">Edit Saved Form (%s)‎‎‎‎</string>-->
     <!--<string name="review_data_button">(%s) ‎‎‎‎</string>-->
-    <string name="review_data_button"> ‎‎‎‎</string>
+    <string name="review_data_button">‎‎‎‎</string>
     <string name="save_all_answers">ফর্ম সংরক্ষন করুন</string>
     <string name="save_enter_data_description"> You are at the end of %s.</string>
     <string name="saving_form">ফর্ম সংরক্ষিত হচ্ছে</string>
