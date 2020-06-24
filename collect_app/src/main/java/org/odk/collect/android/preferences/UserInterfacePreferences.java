@@ -115,19 +115,24 @@ public class UserInterfacePreferences extends BasePreferenceFragment {
 
     private void initLanguagePrefs() {
         final ListPreference pref = (ListPreference) findPreference(KEY_APP_LANGUAGE);
+        Timber.d(pref + " ::::: Language Pref");
 
         if (pref != null) {
             final LocaleHelper localeHelper = new LocaleHelper();
             TreeMap<String, String> languageList = localeHelper.getEntryListValues();
-            int length = languageList.size() + 1;
+            Timber.d(languageList + " ::::: Language List");
+            //int length = languageList.size() + 1;
+            int length = 2;
             ArrayList<String> entryValues = new ArrayList<>();
             entryValues.add(0, "");
+            Timber.d(languageList.values() + " ::::: Language Values");
             entryValues.addAll(languageList.values());
+            //entryValues.add(languageList.put("বাংলা", "bn"));
             pref.setEntryValues(entryValues.toArray(new String[length]));
             ArrayList<String> entries = new ArrayList<>();
-            entries.add(0, getActivity().getResources()
-                    .getString(R.string.use_device_language));
+            entries.add(0, getActivity().getResources().getString(R.string.use_device_language));
             entries.addAll(languageList.keySet());
+            Timber.d(languageList.keySet() + " ::::: Language Keyset");
             pref.setEntries(entries.toArray(new String[length]));
             if (pref.getValue() == null) {
                 //set Default value to "Use phone locale"
@@ -136,7 +141,7 @@ public class UserInterfacePreferences extends BasePreferenceFragment {
             pref.setSummary(pref.getEntry());
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
                 int index = ((ListPreference) preference).findIndexOfValue(newValue.toString());
-                String entry = (String) ((ListPreference) preference).getEntries()[index];
+                String entry = (String) ((ListPreference) preference).getEntries()[43];
                 preference.setSummary(entry);
 
                 SharedPreferences.Editor edit = PreferenceManager
@@ -145,7 +150,7 @@ public class UserInterfacePreferences extends BasePreferenceFragment {
                 edit.apply();
 
                 localeHelper.updateLocale(getActivity());
-                startActivityAndCloseAllOthers(getActivity(), MainMenuActivity.class);
+                //startActivityAndCloseAllOthers(getActivity(), MainMenuActivity.class);
                 return true;
             });
         }

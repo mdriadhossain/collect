@@ -10,12 +10,13 @@
     android:layout_marginBottom="0dp"
     android:background="@drawable/login_page"
     android:padding="0dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="140dp"
         android:gravity="center"
         android:orientation="vertical">
         <!--<TextView
@@ -25,17 +26,6 @@
             android:gravity="center"
             android:text="@string/bn_username"
             android:textSize="18dp" />-->
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="25dp"
-            android:textColor="#FFF"
-            android:hint="@string/bn_username"
-            android:textColorHint="@color/browser_actions_text_color"
-            android:ems="10" />
         <!--<TextView
             android:id="@+id/textView01"
             android:layout_width="match_parent"
@@ -43,39 +33,71 @@
             android:gravity="center"
             android:text="@string/bn_password"
             android:textSize="18dp" />-->
-        <RelativeLayout
-            android:layout_width="fill_parent"
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="240dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="65dp"
+                android:ems="10"
+                android:hint="@string/bn_username"
+                android:textColor="#FFF"
+                android:textColorHint="@color/browser_actions_text_color" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="65dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
-            android:hint="@string/bn_password"
-            android:textColorHint="@color/browser_actions_text_color"
-            android:ems="10"
-            android:textColor="#FFF"
-            android:inputType="textPassword" />
-        <ImageView
-            android:id="@+id/show_pass_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignEnd="@+id/password"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="0dp"
-            android:alpha=".5"
-            android:onClick="ShowHidePass"
-            android:padding="5dp"
-            android:src="@drawable/show_password" />
-        </RelativeLayout>
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:ems="10"
+                    android:hint="@string/bn_password"
+                    android:inputType="textPassword"
+                    android:textColor="#FFF"
+                    android:textColorHint="@color/browser_actions_text_color" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/show_pass_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="25dp"
+                android:alpha=".5"
+                android:contentDescription="Show Hide Password"
+                android:onClick="ShowHidePass"
+                android:padding="5dp"
+                android:src="@drawable/show_password" />
+        </LinearLayout>
+
         <CheckBox
             android:id="@+id/saveLoginCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="5dp"
             android:text="Remember Password?"
             android:textColor="#FFF" />
 
@@ -85,18 +107,19 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="25dp"
             android:background="@drawable/login_button"
             android:text="" />
     </LinearLayout>
+
     <Button
         android:id="@+id/register"
-        android:layout_width="48dip"
-        android:layout_height="48dip"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/set"
+        android:background="@drawable/settings_menu"
         android:padding="159dp"
         android:textSize="21sp" />
 

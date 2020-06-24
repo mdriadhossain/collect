@@ -111,10 +111,9 @@ public class ServerPreferencesFragment extends BasePreferenceFragment implements
             return;
         }
 
-        serverUrlPreference = (EditTextPreference) findPreference(
-                GeneralKeys.KEY_SERVER_URL);
-        usernamePreference = (EditTextPreference) findPreference(GeneralKeys.KEY_USERNAME);
-        passwordPreference = (EditTextPreference) findPreference(GeneralKeys.KEY_PASSWORD);
+        serverUrlPreference = (EditTextPreference) findPreference(GeneralKeys.KEY_SERVER_URL);
+        //usernamePreference = (EditTextPreference) findPreference(GeneralKeys.KEY_USERNAME);
+        //passwordPreference = (EditTextPreference) findPreference(GeneralKeys.KEY_PASSWORD);
 
         urlDropdownSetup();
 
@@ -122,30 +121,28 @@ public class ServerPreferencesFragment extends BasePreferenceFragment implements
         serverUrlPreference.getEditText().setOnTouchListener(this);
         serverUrlPreference.setOnPreferenceChangeListener(createChangeListener());
         serverUrlPreference.setSummary(serverUrlPreference.getText());
-        serverUrlPreference.getEditText().setFilters(
-                new InputFilter[]{new ControlCharacterFilter(), new WhitespaceFilter()});
+        serverUrlPreference.getEditText().setFilters(new InputFilter[]{new ControlCharacterFilter(), new WhitespaceFilter()});
 
-        usernamePreference.setOnPreferenceChangeListener(createChangeListener());
+        /*usernamePreference.setOnPreferenceChangeListener(createChangeListener());
         usernamePreference.setSummary(usernamePreference.getText());
-        usernamePreference.getEditText().setFilters(
-                new InputFilter[]{new ControlCharacterFilter()});
+        usernamePreference.getEditText().setFilters(new InputFilter[]{new ControlCharacterFilter()});
 
         passwordPreference.setOnPreferenceChangeListener(createChangeListener());
         maskPasswordSummary(passwordPreference.getText());
-        passwordPreference.getEditText().setFilters(
-                new InputFilter[]{new ControlCharacterFilter()});
+        passwordPreference.getEditText().setFilters(new InputFilter[]{new ControlCharacterFilter()});
+        */
         serverUrlPreference.setOnPreferenceClickListener(preference -> {
             serverUrlPreference.getEditText().requestFocus();
             return true;
         });
-        usernamePreference.setOnPreferenceClickListener(preference -> {
+        /*usernamePreference.setOnPreferenceClickListener(preference -> {
             usernamePreference.getEditText().requestFocus();
             return true;
         });
         passwordPreference.setOnPreferenceClickListener(preference -> {
             passwordPreference.getEditText().requestFocus();
             return true;
-        });
+        });*/
         //setupTransportPreferences();
         getPreferenceScreen().removePreference(findPreference(KEY_TRANSPORT_PREFERENCE));
         getPreferenceScreen().removePreference(findPreference(KEY_SMS_PREFERENCE));

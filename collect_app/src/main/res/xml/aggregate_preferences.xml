@@ -1,4 +1,5 @@
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         android:key="@string/server_preferences"
@@ -8,16 +9,16 @@
             android:inputType="textNoSuggestions"
             android:key="server_url"
             android:title="@string/server_url" />
-        <EditTextPreference
+        <!--<EditTextPreference
             android:dialogTitle="@string/change_username"
             android:inputType="textNoSuggestions"
             android:key="username"
-            android:title="@string/username" />
+            android:title="" />
         <EditTextPreference
             android:dialogTitle="@string/change_password"
             android:inputType="textPassword"
             android:key="password"
-            android:title="@string/password" />
+            android:title="" />-->
     </PreferenceCategory>
     <PreferenceCategory
         android:key="submission_transport_preference"

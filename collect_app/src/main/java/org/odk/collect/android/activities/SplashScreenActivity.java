@@ -99,6 +99,8 @@ public class SplashScreenActivity extends Activity {
 
         setContentView(R.layout.splash_screen);
 
+
+
         // get the shared preferences object
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -143,6 +145,25 @@ public class SplashScreenActivity extends Activity {
     }
 
     private void endSplashScreen() {
+        //Pause splash screen for 5 mints
+       /* Thread timer= new Thread() {
+            public void run() {
+                try {
+                    //Display for 5 seconds
+                    sleep(5000);
+                }
+                catch (InterruptedException e) {
+                    // TODO: handle exception
+                    e.printStackTrace();
+                }
+                finally {
+                    //Goes to Activity  StartingPoint.java(STARTINGPOINT)
+                    Intent openstartingpoint=new Intent("x.y.z.START");
+                    startActivity(openstartingpoint);
+                }
+            }
+        };
+        timer.start();*/
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }

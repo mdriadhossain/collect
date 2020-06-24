@@ -24,7 +24,7 @@
             style="@style/Widget.Collect.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="@mipmap/notes"
+            app:navigationIcon="@drawable/notes"
             tools:title="@string/app_name" />
 
     </com.google.android.material.appbar.AppBarLayout>
