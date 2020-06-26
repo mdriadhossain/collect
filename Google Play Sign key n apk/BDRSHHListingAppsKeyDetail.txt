@@ -1,0 +1,4 @@
+
+Alias:collector
+Key Password: sse1@solversbd 
+validity:25

@@ -64,16 +64,6 @@
                         android:textSize="18dp" />
 
                     <Button
-                        android:id="@+id/get_forms"
-                        android:layout_width="250dip"
-                        android:layout_height="50dip"
-                        android:layout_gravity="center_vertical|center_horizontal"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/download"
-                        android:padding="20dp"
-                        android:textSize="21sp" />
-
-                    <Button
                         android:id="@+id/enter_data"
                         android:layout_width="250dip"
                         android:layout_height="50dip"
@@ -84,22 +74,21 @@
                         android:textSize="21sp" />
 
                     <Button
-                        android:id="@+id/review_data"
-                        android:layout_width="250dip"
-                        android:layout_height="50dip"
-                        android:layout_gravity="center_vertical|center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/edit"
-                        android:padding="20dp"
-                        android:textSize="21sp" />
-
-                    <Button
                         android:id="@+id/send_data"
                         android:layout_width="250dip"
                         android:layout_height="50dip"
                         android:layout_gravity="center_vertical|center_horizontal"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/send"
+                        android:padding="20dp"
+                        android:textSize="21sp" />
+                    <Button
+                        android:id="@+id/review_data"
+                        android:layout_width="250dip"
+                        android:layout_height="50dip"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/edit"
                         android:padding="20dp"
                         android:textSize="21sp" />
 
@@ -119,8 +108,17 @@
                         android:layout_height="50dip"
                         android:layout_gravity="center_vertical|center_horizontal"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
                         android:background="@drawable/delete"
+                        android:padding="20dp"
+                        android:textSize="21sp" />
+                    <Button
+                        android:id="@+id/get_forms"
+                        android:layout_width="250dip"
+                        android:layout_height="50dip"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/download"
                         android:padding="20dp"
                         android:textSize="21sp" />
 
