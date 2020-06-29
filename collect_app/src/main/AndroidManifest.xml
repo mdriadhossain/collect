@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.odk.collect.android"
+    package="org.odk.collect.bdrs"
     tools:ignore="GoogleAppIndexingWarning">
 
     <uses-feature
@@ -66,9 +66,14 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
-        <!--<activity android:name=".activities.LoginActivity"
+        <activity android:name=".activities.DashboardActivity"></activity>
+        <activity android:name=".activities.ShowInServerActivity" />
+        <activity android:name=".activities.GetNotification" />
+        <!--
+        <activity android:name=".activities.LoginActivity"
             android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>-->
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        -->
         <activity android:name=".activities.LoginActivity" />
 
         <provider
@@ -164,7 +169,7 @@
             android:name=".activities.FormDownloadList"
             android:targetActivity=".activities.FormDownloadListActivity">
             <intent-filter>
-                <action android:name="org.odk.collect.android.FORM_DOWNLOAD" />
+                <action android:name="org.odk.collect.bdrs.FORM_DOWNLOAD" />
 
                 <category android:name="android.intent.category.DEFAULT" />
 
@@ -199,7 +204,7 @@
             android:name=".activities.InstanceUploaderActivity"
             android:targetActivity=".activities.InstanceUploaderActivity">
             <intent-filter>
-                <action android:name="org.odk.collect.android.INSTANCE_UPLOAD" />
+                <action android:name="org.odk.collect.bdrs.INSTANCE_UPLOAD" />
 
                 <category android:name="android.intent.category.DEFAULT" />
 
@@ -265,11 +270,11 @@
         -->
         <provider
             android:name=".provider.FormsProvider"
-            android:authorities="org.odk.collect.android.provider.odk.forms"
+            android:authorities="org.odk.collect.bdrs.provider.odk.forms"
             android:exported="true" />
         <provider
             android:name=".provider.InstanceProvider"
-            android:authorities="org.odk.collect.android.provider.odk.instances"
+            android:authorities="org.odk.collect.bdrs.provider.odk.instances"
             android:exported="true" /> <!-- Enable Shortcuts for Command Actions -->
         <activity
             android:name=".activities.AndroidShortcuts"

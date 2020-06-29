@@ -4,17 +4,17 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "org.odk.collect.android",
+  "applicationId": "org.odk.collect.bdrs",
   "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 3741,
-      "versionName": "3741",
+      "versionCode": 3742,
+      "versionName": "3742",
       "enabled": true,
-      "outputFile": "collect-release-v1.26.1-255-g7bb660944-dirty.apk"
+      "outputFile": "collect-release-v1.26.1-256-g10d58d361-dirty.apk"
     }
   ]
 }

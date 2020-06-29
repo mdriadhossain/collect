@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "640412404956",
-    "firebase_url": "https://opendatakit-forks.firebaseio.com",
-    "project_id": "opendatakit-forks",
-    "storage_bucket": "opendatakit-forks.appspot.com"
+    "project_number": "1051872654230",
+    "firebase_url": "https://bdrs-listing.firebaseio.com",
+    "project_id": "bdrs-listing",
+    "storage_bucket": "bdrs-listing.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:640412404956:android:730483f389563845cb7819",
+        "mobilesdk_app_id": "1:1051872654230:android:0b09603400857ba3d5e3b7",
         "android_client_info": {
-          "package_name": "org.odk.collect.android"
+          "package_name": "org.odk.collect.bdrs"
         }
       },
       "oauth_client": [
         {
-          "client_id": "640412404956-ag8do5nic02k70qr2k1a0mv3du8222hv.apps.googleusercontent.com",
+          "client_id": "1051872654230-v8m31qc3fgjevgg6av8matqpeh6l9263.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA5tuKwVrlKEs-7iMSpdTmAy6qSH-w0lik"
+          "current_key": "AIzaSyAlhbw6_KhXc4cI9wC_B8jQMJc9y7fmEjM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "640412404956-ag8do5nic02k70qr2k1a0mv3du8222hv.apps.googleusercontent.com",
+              "client_id": "1051872654230-v8m31qc3fgjevgg6av8matqpeh6l9263.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

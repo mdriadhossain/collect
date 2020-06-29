@@ -71,7 +71,7 @@ android {
     compileSdkVersion(29)
 
     defaultConfig {
-        applicationId('org.odk.collect.android')
+        applicationId('org.odk.collect.bdrs')
         minSdkVersion(21)
         targetSdkVersion(29)
         versionCode LEGACY_BUILD_NUMBER_OFFSET + getMasterCommitCount()
