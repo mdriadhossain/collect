@@ -1,6 +1,7 @@
 package org.odk.collect.bdrs.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -15,14 +16,15 @@ import android.widget.Toast;
 import org.odk.collect.bdrs.R;
 import org.odk.collect.bdrs.preferences.GeneralKeys;
 
-public class DashboardActivity extends Activity {
+public class DashboardActivity extends CollectAbstractActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        //Toast.makeText(this, "This is Dashboard Activity", Toast.LENGTH_LONG).show();
+        initToolbar();
+
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         //Get Main Server URL
@@ -44,10 +46,10 @@ public class DashboardActivity extends Activity {
         String paramFormID = "&FormID=" + formid;
 
         // Add Parameter with the URL
-        String dashboardUrlWithParam = dashboardUrl + paramUserID + paramFormID;
+        String dashboardUrlWithParam = dashboardUrl + paramUserID;
         // Change the http:// to https://
         String securedDashboardUrlWithParam= dashboardUrlWithParam.replace("http://","https://");
-        //String securedDashboardUrlWithParam = "https://ecds.solversbd.com/UserRole/UserDashboard.php?UserID=467&FormID=106";
+        //String securedDashboardUrlWithParam = "https://ecds.solversbd.com/UserRole/UserDashboard.php?UserID=467";
 
         WebView myWebView = (WebView) findViewById(R.id.wvDashboard);
         WebSettings webSettings = myWebView.getSettings();
@@ -55,5 +57,12 @@ public class DashboardActivity extends Activity {
         myWebView.loadUrl(securedDashboardUrlWithParam);
 
         //Toast.makeText(this, securedDashboardUrlWithParam, Toast.LENGTH_LONG).show();
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setTitle(R.string.app_name);
+
+        setSupportActionBar(toolbar);
     }
 }

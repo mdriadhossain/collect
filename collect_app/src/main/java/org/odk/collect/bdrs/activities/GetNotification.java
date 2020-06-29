@@ -2,24 +2,25 @@ package org.odk.collect.bdrs.activities;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import org.odk.collect.bdrs.R;
 import org.odk.collect.bdrs.preferences.GeneralKeys;
 
-public class GetNotification extends Activity {
+public class GetNotification extends CollectAbstractActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_notification);
-        //initToolbar();
-        //Toast.makeText(this, "This is Notification Activity", Toast.LENGTH_LONG).show();
+        initToolbar();
 
         //Get Main Server URL
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(GetNotification.this);
@@ -48,10 +49,12 @@ public class GetNotification extends Activity {
         //Toast.makeText(this, securedNotificationUrlWithParam, Toast.LENGTH_LONG).show();
     }
 
-    /*private void initToolbar() {
+    private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setTitle(R.string.app_name);
 
         setSupportActionBar(toolbar);
-    }*/
+    }
+
+
 }

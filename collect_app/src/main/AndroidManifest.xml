@@ -66,7 +66,7 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.DashboardActivity"></activity>
+        <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.ShowInServerActivity" />
         <activity android:name=".activities.GetNotification" />
         <!--

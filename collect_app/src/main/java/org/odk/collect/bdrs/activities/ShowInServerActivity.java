@@ -1,25 +1,30 @@
 package org.odk.collect.bdrs.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 
 import org.odk.collect.bdrs.R;
 import org.odk.collect.bdrs.preferences.GeneralKeys;
 
-public class ShowInServerActivity extends Activity {
+import timber.log.Timber;
 
+public class ShowInServerActivity extends CollectAbstractActivity {
+
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_in_server);
-
-        //Toast.makeText(this, "This is Show in server Activity", Toast.LENGTH_LONG).show();
+        initToolbar();
 
         //Get Main Server URL
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(ShowInServerActivity.this);
@@ -37,17 +42,29 @@ public class ShowInServerActivity extends Activity {
         String showInServerUrl = mainServerURL + getShowInServerUrl;
         //Set params
         String paramUserID = "?UserID=" + suid;
-        String paramFormID = "&FormID=" + formid;
+        //String paramFormID = "&FormID=" + formid;
+        String paramFormID = "&FormID=106";
 
         // Add Parameter with the URL
          String showInServerUrlWithParam = showInServerUrl + paramUserID + paramFormID;
         // Change the http:// to https://
         String securedShowInServerUrlWithParam = showInServerUrlWithParam.replace("http://","https://");
-        //String showInServerUrlWithParam = "https://ecds.solversbd.com/Reports/HorizontalShowUserDataReport.php?UserID=467&FormID=106";
+        //String securedShowInServerUrlWithParam = "https://ecds.solversbd.com/Reports/HorizontalShowUserDataReport.php?UserID=467&FormID=106";
+
+        Timber.d("%s Show in Server URL: ", securedShowInServerUrlWithParam);
 
         WebView myWebView = (WebView) findViewById(R.id.wvShowInServer);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
         myWebView.loadUrl(securedShowInServerUrlWithParam);
 
         //Toast.makeText(this, securedShowInServerUrlWithParam, Toast.LENGTH_LONG).show();
+    }
+
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setTitle(R.string.app_name);
+
+        setSupportActionBar(toolbar);
     }
 }

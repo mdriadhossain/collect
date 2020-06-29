@@ -14,12 +14,14 @@
 
 package org.odk.collect.bdrs.activities;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,6 +33,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -278,13 +281,24 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
             }
         });
 
+        ConnectivityManager connec = (ConnectivityManager)getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
+
         // Notification button. no result expected.
         Button getNotificationButton = findViewById(R.id.get_notification);
         getNotificationButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), GetNotification.class);
-                startActivity(i);
+                if ( connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+                        connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+
+                    Intent i = new Intent(getApplicationContext(), GetNotification.class);
+                    startActivity(i);
+                }else {
+                    Toast.makeText(MainMenuActivity.this, "Internet connection is not available!",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -293,8 +307,17 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         getShowDataServer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ShowInServerActivity.class);
-                startActivity(i);
+                if ( connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+                        connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+
+                    Intent i = new Intent(getApplicationContext(), ShowInServerActivity.class);
+                    startActivity(i);
+                }else {
+                    Toast.makeText(MainMenuActivity.this, "Internet connection is not available!",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -303,12 +326,19 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         getDashboard.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
-                startActivity(i);
+                if ( connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+                        connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+
+                    Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
+                    startActivity(i);
+                }else {
+                    Toast.makeText(MainMenuActivity.this, "Internet connection is not available!",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
-
-
 
         //String versionSHA = viewModel.getVersionCommitDescription();
         String versionSHA = null;
@@ -356,6 +386,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
             }
         }
     }
+
 
     @Override
     protected void onResume() {
@@ -514,6 +545,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         alertDialog.show();
     }
 
+    @SuppressLint("StringFormatInvalid")
     private void updateButtons() {
         if (finalizedCursor != null && !finalizedCursor.isClosed()) {
             finalizedCursor.requery();
