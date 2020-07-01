@@ -78,7 +78,7 @@ public class UserInterfacePreferences extends BasePreferenceFragment {
                 String entry = (String) ((ListPreference) preference).getEntries()[index];
                 if (!pref.getEntry().equals(entry)) {
                     preference.setSummary(entry);
-                    startActivityAndCloseAllOthers(getActivity(), MainMenuActivity.class);
+                    //startActivityAndCloseAllOthers(getActivity(), MainMenuActivity.class);
                 }
                 return true;
             });
@@ -145,7 +145,7 @@ public class UserInterfacePreferences extends BasePreferenceFragment {
                 edit.apply();
 
                 localeHelper.updateLocale(getActivity());
-                startActivityAndCloseAllOthers(getActivity(), MainMenuActivity.class);
+                //startActivityAndCloseAllOthers(getActivity(), MainMenuActivity.class);
                 return true;
             });
         }

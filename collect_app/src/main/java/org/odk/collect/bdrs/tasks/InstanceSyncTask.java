@@ -168,7 +168,7 @@ public class InstanceSyncTask extends AsyncTask<Void, String, String> {
                                 String jrVersion = formCursor.getString(formCursor.getColumnIndex(FormsColumns.JR_VERSION));
                                 String formName = formCursor.getString(formCursor.getColumnIndex(FormsColumns.DISPLAY_NAME));
 
-                                Timber.e("Updated Form Name:::::: " + formName);
+                                Timber.e("Updated Form Name:::::: " + InstanceColumns.DISPLAY_NAME);
 
                                 // add missing fields into content values
                                 ContentValues values = new ContentValues();

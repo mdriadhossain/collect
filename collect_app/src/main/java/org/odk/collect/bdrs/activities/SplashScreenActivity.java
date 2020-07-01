@@ -100,7 +100,6 @@ public class SplashScreenActivity extends Activity {
         setContentView(R.layout.splash_screen);
 
 
-
         // get the shared preferences object
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -145,25 +144,6 @@ public class SplashScreenActivity extends Activity {
     }
 
     private void endSplashScreen() {
-        //Pause splash screen for 5 mints
-       /* Thread timer= new Thread() {
-            public void run() {
-                try {
-                    //Display for 5 seconds
-                    sleep(5000);
-                }
-                catch (InterruptedException e) {
-                    // TODO: handle exception
-                    e.printStackTrace();
-                }
-                finally {
-                    //Goes to Activity  StartingPoint.java(STARTINGPOINT)
-                    Intent openstartingpoint=new Intent("x.y.z.START");
-                    startActivity(openstartingpoint);
-                }
-            }
-        };
-        timer.start();*/
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
@@ -215,7 +195,7 @@ public class SplashScreenActivity extends Activity {
     private void startSplashScreen(String path) {
 
         // add items to the splash screen here. makes things less distracting.
-        ImageView iv = findViewById(R.id.splash);
+        /*ImageView iv = findViewById(R.id.splash);
         LinearLayout ll = findViewById(R.id.splash_default);
 
         File f = new File(path);
@@ -223,7 +203,7 @@ public class SplashScreenActivity extends Activity {
             iv.setImageBitmap(decodeFile(f));
             ll.setVisibility(View.GONE);
             iv.setVisibility(View.VISIBLE);
-        }
+        }*/
 
         // create a thread that counts up to the timeout
         Thread t = new Thread() {
