@@ -17,14 +17,17 @@ package org.odk.collect.bdrs.activities;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import org.odk.collect.bdrs.R;
 import org.odk.collect.bdrs.application.Collect;
 import org.odk.collect.bdrs.fragments.dialogs.SimpleDialog;
 import org.odk.collect.bdrs.listeners.InstanceUploaderListener;
 import org.odk.collect.bdrs.listeners.PermissionListener;
+import org.odk.collect.bdrs.preferences.GeneralKeys;
 import org.odk.collect.bdrs.storage.StorageInitializer;
 import org.odk.collect.bdrs.tasks.InstanceServerUploaderTask;
 import org.odk.collect.bdrs.utilities.ApplicationConstants;
@@ -68,6 +71,7 @@ public class InstanceUploaderActivity extends CollectAbstractActivity implements
 
     // URL specified when authentication is requested or specified from intent extra as override
     private String url;
+    private String uploadFormURL;
 
     // Set from intent extras
     private String username;
@@ -106,6 +110,12 @@ public class InstanceUploaderActivity extends CollectAbstractActivity implements
 
     private void init(Bundle savedInstanceState) {
         alertMsg = getString(R.string.please_wait);
+
+        //Get Submission URL
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(InstanceUploaderActivity.this);
+        uploadFormURL = settings.getString(GeneralKeys.KEY_SUBMISSION_FORM_URL, getApplication().getString(R.string.default_odk_submission));
+
+        Timber.d("%s Upload Form Path: ", uploadFormURL);
 
         setTitle(getString(R.string.send_data));
 
@@ -173,7 +183,9 @@ public class InstanceUploaderActivity extends CollectAbstractActivity implements
             instanceServerUploaderTask = new InstanceServerUploaderTask();
 
             if (url != null) {
-                instanceServerUploaderTask.setCompleteDestinationUrl(url + Collect.getInstance().getString(R.string.default_odk_submission));
+                //instanceServerUploaderTask.setCompleteDestinationUrl(url + Collect.getInstance().getString(R.string.default_odk_submission));
+                instanceServerUploaderTask.setCompleteDestinationUrl(url + uploadFormURL);
+                Timber.d("%s Destination URL First: ", url + uploadFormURL);
 
                 if (deleteInstanceAfterUpload != null) {
                     instanceServerUploaderTask.setDeleteInstanceAfterSubmission(deleteInstanceAfterUpload);
@@ -364,7 +376,9 @@ public class InstanceUploaderActivity extends CollectAbstractActivity implements
         // TODO: is this really needed here? When would the task not have gotten a server set in
         // init already?
         if (url != null) {
-            instanceServerUploaderTask.setCompleteDestinationUrl(url + Collect.getInstance().getString(R.string.default_odk_submission), false);
+            //instanceServerUploaderTask.setCompleteDestinationUrl(url + Collect.getInstance().getString(R.string.default_odk_submission), false);
+            instanceServerUploaderTask.setCompleteDestinationUrl(url + uploadFormURL, false);
+            Timber.d("%s Destination URL: ", url + uploadFormURL);
         }
         instanceServerUploaderTask.execute(instancesToSend);
     }

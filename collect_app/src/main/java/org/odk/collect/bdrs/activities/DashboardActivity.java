@@ -34,7 +34,8 @@ public class DashboardActivity extends CollectAbstractActivity {
             mainServerURL = mainServerURL.substring(0, mainServerURL.length() - 1);
         }
         //Get Notification URL
-        String getDashboardUrl = getResources().getString(R.string.default_odk_get_dashboard);
+        //String getDashboardUrl = getResources().getString(R.string.default_odk_get_dashboard);
+        String getDashboardUrl = settings.getString(GeneralKeys.KEY_USER_DASHBOARD_URL, getApplication().getString(R.string.default_odk_get_dashboard));
         //Get User ID
         String suid = new Integer(AndroidTutorialApp.uid).toString();
         //Get FormID

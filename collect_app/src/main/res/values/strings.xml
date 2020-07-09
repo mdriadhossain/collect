@@ -39,6 +39,13 @@
     <string name="change_language">ভাষা পরিবর্তন </string>
     <string name="change_password">পাসওয়ার্ড পরিবর্তন</string>
     <string name="change_username">ব্যবহারকারীর নাম পরিবর্তন</string>
+
+    <string name="download_form_url">Download URL</string>
+    <string name="submission_form_url">Submission URL</string>
+    <string name="notification_url">Notification URL</string>
+    <string name="user_data_report_url">Report URL</string>
+    <string name="user_dashboard_url">Dashboard URL</string>
+
     <string name="clearanswer_confirm">উত্তর মুছে \"%s\" ফেলতে চান?</string>
     <string name="clear_answer">উত্তর মুছে ফেলুন</string>
     <string name="clear_answer_ask">উত্তর মুছে ফেলতে চান?</string>
@@ -150,6 +157,13 @@
     <string name="uploading_data">ফর্ম পাঠানো হচ্ছে</string>
     <string name="url_error">Sorry, invalid URL!</string>
     <string name="username">Username</string>
+
+    <string name="get_download_form_url">Download Path</string>
+    <string name="get_submit_form_url">Submission Path</string>
+    <string name="get_notification_url">Notification Path</string>
+    <string name="get_user_data_report_url">Report Path</string>
+    <string name="get_user_dashboard_url">Dashboard Path</string>
+
     <string name="view_hierarchy">Go To Prompt</string>
     <string name="general_preferences">General Settings</string>
     <string name="client">User interface</string>
@@ -312,6 +326,7 @@
     <string name="google_sheets_missing_columns">Spreadsheet is missing the following columns: %1$s</string>
     <string name="password_error_whitespace">Leading or trailing whitespace not allowed in passwords</string>
     <string name="username_error_whitespace">Leading or trailing whitespace not allowed in usernames</string>
+    <string name="url_error_whitespace">Leading or trailing whitespace not allowed</string>
     <string name="google_play_services_error_occured">Unable to access Google Maps. Is Google Play Services installed?</string>
     <string name="about_preferences">About Data Collector</string>
     <string name="tell_your_friends">Share ODK Collect</string>

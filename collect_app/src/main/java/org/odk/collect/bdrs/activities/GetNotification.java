@@ -29,7 +29,9 @@ public class GetNotification extends CollectAbstractActivity {
             mainServerURL = mainServerURL.substring(0, mainServerURL.length() - 1);
         }
         //Get Notification URL
-        String getNotificationUrl = getResources().getString(R.string.default_odk_get_notification);
+        //String getNotificationUrl = getResources().getString(R.string.default_odk_get_notification);
+        String getNotificationUrl = settings.getString(GeneralKeys.KEY_NOTIFICATION_URL, getApplication().getString(R.string.default_odk_get_notification));
+
         //Get User ID
         String suid = new Integer(AndroidTutorialApp.uid).toString();
         // Concatenate Server URL and Notification URL

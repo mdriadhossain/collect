@@ -284,6 +284,8 @@ public class InstanceServerUploader extends InstanceUploader {
             urlString = getServerSubmissionURL();
         }
 
+        Timber.d("Submission URL: " + urlString);
+
         // add deviceID to request
         String updatedFormName = currentInstance.getDisplayName();
         String userid = new Integer(AndroidTutorialApp.uid).toString();
@@ -317,8 +319,8 @@ public class InstanceServerUploader extends InstanceUploader {
         }
 
         // NOTE: /submission must not be translated! It is the well-known path on the server.
-        String submissionPath = settings.getString(GeneralKeys.KEY_SUBMISSION_URL,
-                app.getString(R.string.default_odk_submission));
+        //String submissionPath = settings.getString(GeneralKeys.KEY_SUBMISSION_URL, app.getString(R.string.default_odk_submission));
+        String submissionPath = settings.getString(GeneralKeys.KEY_SUBMISSION_FORM_URL, app.getString(R.string.default_odk_submission));
 
         if (!submissionPath.startsWith(URL_PATH_SEP)) {
             submissionPath = URL_PATH_SEP + submissionPath;

@@ -86,18 +86,22 @@ public class FormListDownloader {
         }
 
         // NOTE: /formlist must not be translated! It is the well-known path on the server.
-        String formListUrl = application.getString(
-                R.string.default_odk_formlist);
+        String formListUrl = application.getString(R.string.default_odk_formlist);
+        //String formListUrl = settings.getString(GeneralKeys.KEY_DOWNLOAD_FORM_URL, application.getString(R.string.default_odk_formlist));
 
         // When a url is supplied, we will use the default formList url
-        String downloadPath = (url != null) ?
-                formListUrl : settings.getString(GeneralKeys.KEY_FORMLIST_URL, formListUrl);
+        //String downloadPath = (url != null) ? formListUrl : settings.getString(GeneralKeys.KEY_FORMLIST_URL, formListUrl);
+        String downloadPath = (url != null) ? formListUrl : settings.getString(GeneralKeys.KEY_DOWNLOAD_FORM_URL, formListUrl);
+
+        Timber.d("%s Download Form URL: ", downloadPath);
 
         String suid = new Integer(AndroidTutorialApp.uid).toString();
 
         downloadListUrl += downloadPath;
         downloadListUrl += "?UserID=";
         downloadListUrl += suid;
+
+        Timber.d("%s Download Form URL: ", downloadListUrl);
 
         // We populate this with available forms from the specified server.
         // <formname, details>

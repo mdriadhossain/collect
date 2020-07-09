@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.webkit.WebSettings;
@@ -26,6 +27,8 @@ public class ShowInServerActivity extends CollectAbstractActivity {
         setContentView(R.layout.activity_show_in_server);
         initToolbar();
 
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         //Get Main Server URL
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(ShowInServerActivity.this);
         String mainServerURL = settings.getString(GeneralKeys.KEY_SERVER_URL, getApplication().getString(R.string.default_server_url));
@@ -33,7 +36,8 @@ public class ShowInServerActivity extends CollectAbstractActivity {
             mainServerURL = mainServerURL.substring(0, mainServerURL.length() - 1);
         }
         //Get Notification URL
-        String getShowInServerUrl = getResources().getString(R.string.default_odk_show_in_server);
+        //String getShowInServerUrl = getResources().getString(R.string.default_odk_show_in_server);
+        String getShowInServerUrl = settings.getString(GeneralKeys.KEY_USER_DATA_REPORT_URL, getApplication().getString(R.string.default_odk_show_in_server));
         //Get User ID
         String suid = new Integer(AndroidTutorialApp.uid).toString();
         //Get FormID
@@ -46,7 +50,7 @@ public class ShowInServerActivity extends CollectAbstractActivity {
         String paramFormID = "&FormID=106";
 
         // Add Parameter with the URL
-         String showInServerUrlWithParam = showInServerUrl + paramUserID + paramFormID;
+         String showInServerUrlWithParam = showInServerUrl + paramUserID;
         // Change the http:// to https://
         String securedShowInServerUrlWithParam = showInServerUrlWithParam.replace("http://","https://");
         //String securedShowInServerUrlWithParam = "https://ecds.solversbd.com/Reports/HorizontalShowUserDataReport.php?UserID=467&FormID=106";

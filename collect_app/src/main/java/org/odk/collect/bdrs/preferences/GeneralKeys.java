@@ -16,6 +16,12 @@ public final class GeneralKeys {
     public static final String KEY_USERNAME                 = "username";
     public static final String KEY_PASSWORD                 = "password";
 
+    public static final String KEY_DOWNLOAD_FORM_URL        = "download_form_url";
+    public static final String KEY_SUBMISSION_FORM_URL      = "submission_form_url";
+    public static final String KEY_NOTIFICATION_URL         = "notification_url";
+    public static final String KEY_USER_DATA_REPORT_URL     = "user_data_report_url";
+    public static final String KEY_USER_DASHBOARD_URL       = "user_dashboard_url";
+
     // other_preferences.xml
     public static final String KEY_FORMLIST_URL             = "formlist_url";
     public static final String KEY_SUBMISSION_URL           = "submission_url";
@@ -109,6 +115,13 @@ public final class GeneralKeys {
         hashMap.put(KEY_SERVER_URL,                 Collect.getInstance().getString(R.string.default_server_url));
         hashMap.put(KEY_USERNAME,                   "");
         hashMap.put(KEY_PASSWORD,                   "");
+
+        hashMap.put(KEY_DOWNLOAD_FORM_URL,          Collect.getInstance().getString(R.string.default_odk_formlist));
+        hashMap.put(KEY_SUBMISSION_FORM_URL,        Collect.getInstance().getString(R.string.default_odk_submission));
+        hashMap.put(KEY_NOTIFICATION_URL,           Collect.getInstance().getString(R.string.default_odk_get_notification));
+        hashMap.put(KEY_USER_DATA_REPORT_URL,       Collect.getInstance().getString(R.string.default_odk_show_in_server));
+        hashMap.put(KEY_USER_DASHBOARD_URL,         Collect.getInstance().getString(R.string.default_odk_get_dashboard));
+
         // form_management_preferences.xml
         hashMap.put(KEY_AUTOSEND,                   AUTOSEND_OFF);
         hashMap.put(KEY_GUIDANCE_HINT,              GUIDANCE_HINT_OFF);

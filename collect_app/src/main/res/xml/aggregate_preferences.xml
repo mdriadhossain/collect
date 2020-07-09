@@ -19,6 +19,31 @@
             android:inputType="textPassword"
             android:key="password"
             android:title="" />-->
+        <EditTextPreference
+            android:dialogTitle="@string/download_form_url"
+            android:inputType="textNoSuggestions"
+            android:key="download_form_url"
+            android:title="@string/get_download_form_url" />
+        <EditTextPreference
+            android:dialogTitle="@string/submission_form_url"
+            android:inputType="textNoSuggestions"
+            android:key="submission_form_url"
+            android:title="@string/get_submit_form_url" />
+        <EditTextPreference
+            android:dialogTitle="@string/notification_url"
+            android:inputType="textNoSuggestions"
+            android:key="notification_url"
+            android:title="@string/get_notification_url" />
+        <EditTextPreference
+            android:dialogTitle="@string/user_data_report_url"
+            android:inputType="textNoSuggestions"
+            android:key="user_data_report_url"
+            android:title="@string/get_user_data_report_url" />
+        <EditTextPreference
+            android:dialogTitle="@string/user_dashboard_url"
+            android:inputType="textNoSuggestions"
+            android:key="user_dashboard_url"
+            android:title="@string/get_user_dashboard_url" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="submission_transport_preference"

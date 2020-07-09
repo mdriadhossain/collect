@@ -258,8 +258,7 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
                             return;
                         }
                     } else {
-                        i = new Intent(getApplicationContext(),
-                                FormDownloadListActivity.class);
+                        i = new Intent(getApplicationContext(), FormDownloadListActivity.class);
                     }
                     // i.putExtra("UserGlobalID", globalUserID);
                     startActivity(i);

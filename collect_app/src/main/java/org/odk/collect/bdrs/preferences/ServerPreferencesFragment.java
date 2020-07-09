@@ -77,6 +77,13 @@ public class ServerPreferencesFragment extends BasePreferenceFragment implements
     protected EditTextPreference serverUrlPreference;
     protected EditTextPreference usernamePreference;
     protected EditTextPreference passwordPreference;
+
+    protected EditTextPreference formDownloadUrlPreference;
+    protected EditTextPreference formSubmissionUrlPreference;
+    protected EditTextPreference notificationUrlPreference;
+    protected EditTextPreference userDataReportUrlPreference;
+    protected EditTextPreference userDashboardUrlPreference;
+
     //protected ExtendedEditTextPreference smsGatewayPreference;
     protected EditTextPreference submissionUrlPreference;
     protected EditTextPreference formListUrlPreference;
@@ -114,6 +121,11 @@ public class ServerPreferencesFragment extends BasePreferenceFragment implements
         serverUrlPreference = (EditTextPreference) findPreference(GeneralKeys.KEY_SERVER_URL);
         //usernamePreference = (EditTextPreference) findPreference(GeneralKeys.KEY_USERNAME);
         //passwordPreference = (EditTextPreference) findPreference(GeneralKeys.KEY_PASSWORD);
+        formDownloadUrlPreference = (EditTextPreference) findPreference(GeneralKeys.KEY_DOWNLOAD_FORM_URL);
+        formSubmissionUrlPreference = (EditTextPreference) findPreference(GeneralKeys.KEY_SUBMISSION_FORM_URL);
+        notificationUrlPreference = (EditTextPreference) findPreference(GeneralKeys.KEY_NOTIFICATION_URL);
+        userDataReportUrlPreference = (EditTextPreference) findPreference(GeneralKeys.KEY_USER_DATA_REPORT_URL);
+        userDashboardUrlPreference = (EditTextPreference) findPreference(GeneralKeys.KEY_USER_DASHBOARD_URL);
 
         urlDropdownSetup();
 
@@ -131,10 +143,58 @@ public class ServerPreferencesFragment extends BasePreferenceFragment implements
         maskPasswordSummary(passwordPreference.getText());
         passwordPreference.getEditText().setFilters(new InputFilter[]{new ControlCharacterFilter()});
         */
+
+        formDownloadUrlPreference.setOnPreferenceChangeListener(createChangeListener());
+        formDownloadUrlPreference.setSummary(formDownloadUrlPreference.getText());
+        formDownloadUrlPreference.getEditText().setFilters(new InputFilter[]{new ControlCharacterFilter()});
+
+        formSubmissionUrlPreference.setOnPreferenceChangeListener(createChangeListener());
+        formSubmissionUrlPreference.setSummary(formSubmissionUrlPreference.getText());
+        formSubmissionUrlPreference.getEditText().setFilters(new InputFilter[]{new ControlCharacterFilter()});
+
+        notificationUrlPreference.setOnPreferenceChangeListener(createChangeListener());
+        notificationUrlPreference.setSummary(notificationUrlPreference.getText());
+        notificationUrlPreference.getEditText().setFilters(new InputFilter[]{new ControlCharacterFilter()});
+
+        userDataReportUrlPreference.setOnPreferenceChangeListener(createChangeListener());
+        userDataReportUrlPreference.setSummary(userDataReportUrlPreference.getText());
+        userDataReportUrlPreference.getEditText().setFilters(new InputFilter[]{new ControlCharacterFilter()});
+
+        userDashboardUrlPreference.setOnPreferenceChangeListener(createChangeListener());
+        userDashboardUrlPreference.setSummary(userDashboardUrlPreference.getText());
+        userDashboardUrlPreference.getEditText().setFilters(new InputFilter[]{new ControlCharacterFilter()});
+
         serverUrlPreference.setOnPreferenceClickListener(preference -> {
             serverUrlPreference.getEditText().requestFocus();
             return true;
         });
+
+        formDownloadUrlPreference.setOnPreferenceClickListener(preference -> {
+            formDownloadUrlPreference.getEditText().requestFocus();
+            return true;
+        });
+
+        formSubmissionUrlPreference.setOnPreferenceClickListener(preference -> {
+            formSubmissionUrlPreference.getEditText().requestFocus();
+            return true;
+        });
+
+        notificationUrlPreference.setOnPreferenceClickListener(preference -> {
+            notificationUrlPreference.getEditText().requestFocus();
+            return true;
+        });
+
+        userDataReportUrlPreference.setOnPreferenceClickListener(preference -> {
+            userDataReportUrlPreference.getEditText().requestFocus();
+            return true;
+        });
+
+        userDashboardUrlPreference.setOnPreferenceClickListener(preference -> {
+            userDashboardUrlPreference.getEditText().requestFocus();
+            return true;
+        });
+
+
         /*usernamePreference.setOnPreferenceClickListener(preference -> {
             usernamePreference.getEditText().requestFocus();
             return true;
@@ -341,6 +401,82 @@ public class ServerPreferencesFragment extends BasePreferenceFragment implements
                     }
                     break;
 
+
+                case GeneralKeys.KEY_DOWNLOAD_FORM_URL:
+                    String formDownloadURL = newValue.toString();
+                    // remove all trailing "/"s
+                    while (formDownloadURL.endsWith("/")) {
+                        formDownloadURL = formDownloadURL.substring(0, formDownloadURL.length() - 1);
+                    }
+                    // do not allow leading and trailing whitespace
+                    if (!formDownloadURL.equals(formDownloadURL.trim())) {
+                        ToastUtils.showShortToast(R.string.url_error_whitespace);
+                        return false;
+                    }
+
+                    preference.setSummary(formDownloadURL);
+                    return true;
+
+                case GeneralKeys.KEY_SUBMISSION_FORM_URL:
+                    String formSubmissionURL = newValue.toString();
+                    // remove all trailing "/"s
+                    while (formSubmissionURL.endsWith("/")) {
+                        formSubmissionURL = formSubmissionURL.substring(0, formSubmissionURL.length() - 1);
+                    }
+                    // do not allow leading and trailing whitespace
+                    if (!formSubmissionURL.equals(formSubmissionURL.trim())) {
+                        ToastUtils.showShortToast(R.string.url_error_whitespace);
+                        return false;
+                    }
+
+                    preference.setSummary(formSubmissionURL);
+                    return true;
+
+                case GeneralKeys.KEY_NOTIFICATION_URL:
+                    String notificationURL = newValue.toString();
+                    // remove all trailing "/"s
+                    while (notificationURL.endsWith("/")) {
+                        notificationURL = notificationURL.substring(0, notificationURL.length() - 1);
+                    }
+                    // do not allow leading and trailing whitespace
+                    if (!notificationURL.equals(notificationURL.trim())) {
+                        ToastUtils.showShortToast(R.string.url_error_whitespace);
+                        return false;
+                    }
+
+                    preference.setSummary(notificationURL);
+                    return true;
+
+                case GeneralKeys.KEY_USER_DATA_REPORT_URL:
+                    String userDataReportURL = newValue.toString();
+                    // remove all trailing "/"s
+                    while (userDataReportURL.endsWith("/")) {
+                        userDataReportURL = userDataReportURL.substring(0, userDataReportURL.length() - 1);
+                    }
+                    // do not allow leading and trailing whitespace
+                    if (!userDataReportURL.equals(userDataReportURL.trim())) {
+                        ToastUtils.showShortToast(R.string.url_error_whitespace);
+                        return false;
+                    }
+
+                    preference.setSummary(userDataReportURL);
+                    return true;
+
+                case GeneralKeys.KEY_USER_DASHBOARD_URL:
+                    String userDashboardURL = newValue.toString();
+                    // remove all trailing "/"s
+                    while (userDashboardURL.endsWith("/")) {
+                        userDashboardURL = userDashboardURL.substring(0, userDashboardURL.length() - 1);
+                    }
+                    // do not allow leading and trailing whitespace
+                    if (!userDashboardURL.equals(userDashboardURL.trim())) {
+                        ToastUtils.showShortToast(R.string.url_error_whitespace);
+                        return false;
+                    }
+
+                    preference.setSummary(userDashboardURL);
+                    return true;
+
                 case GeneralKeys.KEY_USERNAME:
                     String username = newValue.toString();
 
@@ -493,7 +629,6 @@ public class ServerPreferencesFragment extends BasePreferenceFragment implements
         }
     }
     */
-
     private void runGoogleAccountValidation() {
         String account = (String) GeneralSharedPreferences.getInstance().get(KEY_SELECTED_GOOGLE_ACCOUNT);
         String protocol = (String) GeneralSharedPreferences.getInstance().get(KEY_PROTOCOL);
