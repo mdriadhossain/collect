@@ -90,8 +90,8 @@ public class GetNotification extends CollectAbstractActivity{
         String securedNotificationUrl = notificationURL.replace("http://", "https://");
         //String securedNotificationUrlWithParam = "https://ecds.solversbd.com/Main/Notification.php?UserID=467";
 
-        //url = securedNotificationUrlWithParam;
-        url = "https://steptoonline.com/lib/SampleJSON.php";
+        url = securedNotificationUrlWithParam;
+        //url = "https://steptoonline.com/lib/SampleJSON.php";
 
         noticeList = new ArrayList<>();
         lv = (ListView) findViewById(R.id.notice_list);
