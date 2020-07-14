@@ -332,6 +332,8 @@ dependencies {
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:${rootProject.okhttp3Version}"
 
     androidTestImplementation "android.arch.work:work-testing:1.0.1"
+
+    implementation 'com.alespero:expandable-cardview:0.6'
 }
 
 // Must be at bottom to prevent dependency collisions

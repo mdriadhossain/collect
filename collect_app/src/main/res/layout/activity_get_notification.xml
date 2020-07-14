@@ -9,9 +9,9 @@
 
     <include layout="@layout/app_bar_layout" />
 
-    <WebView
-        android:id="@+id/wvGetNotification"
+    <ListView
+        android:id="@+id/notice_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:dividerHeight="1dp" />
 </LinearLayout>

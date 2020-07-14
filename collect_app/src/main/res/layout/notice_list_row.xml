@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+<com.alespero.expandablecardview.ExpandableCardView
+    android:id="@+id/noticeCardView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:title="New Notification"
+    app:icon="@drawable/ic_closed_envelop"
+    app:inner_view="@layout/notice_custom_view"
+    app:expandOnClick="true"/>
+
+</LinearLayout>
