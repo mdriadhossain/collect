@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingStart="25dp"
     android:paddingEnd="15dp"
@@ -11,39 +11,53 @@
         android:id="@+id/noticeID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="1"
         android:textSize="14sp"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/noticeFrom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Rafiqul Islam"
         android:textSize="22sp" />
 
     <TextView
         android:id="@+id/noticeEntryDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="2020-07-09 11:21:59.410"
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/noticeMsg"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Test Information"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/noticeStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Unread"
         android:textSize="14sp"
-        android:visibility="invisible"/>
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/noticeOpenDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="NULL"
         android:textSize="14sp"
-        android:visibility="invisible"/>
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/btnMarkAsRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:focusable="false"
+        android:text="Mark as Read" />
 </LinearLayout>

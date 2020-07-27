@@ -1,18 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="0dp">
 
-<com.alespero.expandablecardview.ExpandableCardView
-    android:id="@+id/noticeCardView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:title="New Notification"
-    app:icon="@drawable/ic_closed_envelop"
-    app:inner_view="@layout/notice_custom_view"
-    app:expandOnClick="true"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/noticeCardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textNoticeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/browser_actions_text_color"
+                android:drawableStart="@drawable/ic_important_notice"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:text="New Notification"
+                android:textAlignment="textStart"
+
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp">
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="From: " />
+
+                        <TextView
+                            android:id="@+id/textNoticeFrom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tony Stark"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date: " />
+
+                        <TextView
+                            android:id="@+id/textNoticeEntryDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2020-07-09 11:21:59"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Status: " />
+
+                        <TextView
+                            android:id="@+id/textNoticeStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Unread"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Message   " />
+
+                        <TextView
+                            android:id="@+id/textNoticeMessage"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:width="0dp"
+                            android:text="Test Information"
+                            android:textStyle="bold" />
+                    </TableRow>
+                    <TableRow>
+
+                        <View
+                            android:id="@+id/viewBlankSpace"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:width="0dp" />
+                    </TableRow>
+                    <TableRow>
+
+                        <Button
+                            android:id="@+id/btnCollapse"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:width="0dp"
+                            android:text="OK"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                </TableLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
