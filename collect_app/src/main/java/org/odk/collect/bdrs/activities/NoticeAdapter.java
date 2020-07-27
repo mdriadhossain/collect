@@ -1,5 +1,6 @@
 package org.odk.collect.bdrs.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,8 +42,8 @@ import timber.log.Timber;
 public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder> implements View.OnClickListener {
     private List<Notice> noticeList;
     private Context context;
-    private Button btnCollapseNow;
-    private TextView textNoticeTitle;
+   // private Button btnCollapseNow;
+    //private TextView textNoticeTitle;
 
     private static int currentPosition = -1;
 
@@ -57,6 +58,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
         return new NoticeViewHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final NoticeViewHolder holder, final int position) {
         Notice notice = noticeList.get(position);
@@ -77,25 +79,31 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
         if (noticeStatus.equals("1")) {
             noticeStatus = "Opened at " + formatedNotificationReadTime;
-            textNoticeTitle.setBackgroundColor(Color.GRAY);
+            holder.textNoticeTitle.setBackgroundColor(Color.GRAY);
         } else {
             noticeStatus = "Unread";
-            textNoticeTitle.setBackgroundColor(Color.BLACK);
+            holder.textNoticeTitle.setBackgroundColor(Color.BLACK);
         }
         String formatedDataEntryDate = getFormatedDate(notice.getDataEntryDate());
-        textNoticeTitle.setText(notice.getFullName() + "   " + formatedDataEntryDate);
+        holder.textNoticeTitle.setText(notice.getFullName() + "  " + formatedDataEntryDate);
 
-        textNoticeTitle.setTextColor(Color.WHITE);
+        holder.textNoticeTitle.setTextColor(Color.WHITE);
 
-        btnCollapseNow.setOnClickListener(new View.OnClickListener() {
+        holder.btnCollapseNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //reloding the list
+                //currentPosition = position;
                 currentPosition = -1;
-                notifyDataSetChanged();
+                //reloding the list
+
+               notifyDataSetChanged();
+                //notifyItemChanged(position);
+
+                //notify();
 
                 Timber.tag("NoticeChangeURL::").d("Activity Reloaded.");
-                //GoToURL(notificationStatusChangeURL);
+
             }
         });
 
@@ -120,13 +128,15 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
             holder.linearLayout.startAnimation(slideDown);
         }
 
-        textNoticeTitle.setOnClickListener(new View.OnClickListener() {
+
+
+        holder.textNoticeTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 //getting the position of the item to expand it
                 currentPosition = position;
-                //currentPosition = -1;
+                //currentPosition = 0;
 
                 SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
                 String mainServerURL = settings.getString(GeneralKeys.KEY_SERVER_URL, context.getApplicationContext().getString(R.string.default_server_url));
@@ -143,11 +153,15 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
                 //GoToURL(notificationStatusChangeURL);
                 //String notificationStatusChangeURL = "https://ecds.solversbd.com" + "/Main/NotificationReadStatus.php?NotifyID=" + notice.getId() + "&Status=1";
-                goStatusChangeURL(notificationStatusChangeURL);
+                //goStatusChangeURL(notificationStatusChangeURL);
 
                 Timber.tag("NoticeChangeURL::").d(notificationStatusChangeURL);
                 //reloding the list
-                notifyDataSetChanged();
+                //notifyDataSetChanged();
+                //notifyItemChanged(position);
+                notifyItemRangeChanged(position, noticeList.size());
+
+                goStatusChangeURL(notificationStatusChangeURL);
             }
         });
     }
@@ -166,8 +180,8 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
     class NoticeViewHolder extends RecyclerView.ViewHolder {
         TextView textNoticeFrom, textNoticeEntryDate, textNoticeStatus, textNoticeMessage;
-        //TextView textNoticeTitle;
-        //Button btnCollapseNow;
+        TextView textNoticeTitle;
+        Button btnCollapseNow;
         LinearLayout linearLayout;
 
         NoticeViewHolder(View itemView) {
@@ -220,12 +234,13 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
     public String getFormatedDate(String inputDateFormate) {
         String formatedDate = "null";
-        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
+        @SuppressLint("SimpleDateFormat") DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
         //String inputDateStr="2013-06-24";
         String inputDateStr = inputDateFormate;
         try {
             Date date = inputFormat.parse(inputDateStr);
+            assert date != null;
             formatedDate = outputFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
