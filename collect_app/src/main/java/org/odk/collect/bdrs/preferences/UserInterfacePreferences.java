@@ -24,6 +24,7 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 
 import org.odk.collect.bdrs.R;
+import org.odk.collect.bdrs.activities.LoginActivity;
 import org.odk.collect.bdrs.activities.MainMenuActivity;
 import org.odk.collect.bdrs.utilities.LocaleHelper;
 import org.odk.collect.bdrs.utilities.MediaUtils;
@@ -34,6 +35,7 @@ import java.util.TreeMap;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_CANCELED;
+import static org.odk.collect.bdrs.activities.ActivityUtils.reloadActivity;
 import static org.odk.collect.bdrs.activities.ActivityUtils.startActivityAndCloseAllOthers;
 import static org.odk.collect.bdrs.preferences.GeneralKeys.KEY_APP_LANGUAGE;
 import static org.odk.collect.bdrs.preferences.GeneralKeys.KEY_APP_THEME;
@@ -78,7 +80,8 @@ public class UserInterfacePreferences extends BasePreferenceFragment {
                 String entry = (String) ((ListPreference) preference).getEntries()[index];
                 if (!pref.getEntry().equals(entry)) {
                     preference.setSummary(entry);
-                    //startActivityAndCloseAllOthers(getActivity(), MainMenuActivity.class);
+                    startActivityAndCloseAllOthers(getActivity(), LoginActivity.class);
+                    //reloadActivity(getActivity());
                 }
                 return true;
             });
