@@ -25,7 +25,7 @@ public class DashboardActivity extends CollectAbstractActivity {
         setContentView(R.layout.activity_dashboard);
         initToolbar();
 
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         //Get Main Server URL
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(DashboardActivity.this);

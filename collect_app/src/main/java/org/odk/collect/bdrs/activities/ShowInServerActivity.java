@@ -27,7 +27,7 @@ public class ShowInServerActivity extends CollectAbstractActivity {
         setContentView(R.layout.activity_show_in_server);
         initToolbar();
 
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         //Get Main Server URL
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(ShowInServerActivity.this);
