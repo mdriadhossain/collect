@@ -292,10 +292,10 @@ public class InstanceServerUploader extends InstanceUploader {
         String formid = new Integer(DowloadedFormID.frmid).toString();
         Timber.i("New Updated From Name::: %s", updatedFormName);
         try {
-            urlString += "?deviceID=" + URLEncoder.encode(deviceId != null ? deviceId : "", "UTF-8");
-            urlString += "?UserID=" + userid;
-            urlString += "?FormID=" + formid;
-            urlString += "?FormName=" + encode(updatedFormName);
+            urlString += "&deviceID=" + URLEncoder.encode(deviceId != null ? deviceId : "", "UTF-8");
+            urlString += "&UserID=" + userid;
+            urlString += "&FormID=" + formid;
+            urlString += "&FormName=" + encode(updatedFormName);
             Timber.i("New Updated URL::: %s", urlString);
             //urlString = "http://ecds.solversbd.com/Main/submission.php?deviceID=352317057029961?UserID=467?FormID=106";
         } catch (UnsupportedEncodingException e) {
