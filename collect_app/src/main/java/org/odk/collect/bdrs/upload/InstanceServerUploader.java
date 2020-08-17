@@ -295,7 +295,7 @@ public class InstanceServerUploader extends InstanceUploader {
             urlString += "?deviceID=" + URLEncoder.encode(deviceId != null ? deviceId : "", "UTF-8");
             urlString += "&UserID=" + userid;
             urlString += "&FormID=" + formid;
-            urlString += "&FormName=" + encode(updatedFormName);
+            urlString += "&DataName=" + encode(updatedFormName);
             Timber.i("New Updated URL::: %s", urlString);
             //urlString = "http://ecds.solversbd.com/Main/submission.php?deviceID=352317057029961?UserID=467?FormID=106";
         } catch (UnsupportedEncodingException e) {
