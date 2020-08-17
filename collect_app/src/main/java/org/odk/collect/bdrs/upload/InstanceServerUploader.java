@@ -292,7 +292,7 @@ public class InstanceServerUploader extends InstanceUploader {
         String formid = new Integer(DowloadedFormID.frmid).toString();
         Timber.i("New Updated From Name::: %s", updatedFormName);
         try {
-            urlString += "&deviceID=" + URLEncoder.encode(deviceId != null ? deviceId : "", "UTF-8");
+            urlString += "?deviceID=" + URLEncoder.encode(deviceId != null ? deviceId : "", "UTF-8");
             urlString += "&UserID=" + userid;
             urlString += "&FormID=" + formid;
             urlString += "&FormName=" + encode(updatedFormName);
