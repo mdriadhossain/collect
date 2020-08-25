@@ -82,7 +82,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
             holder.textNoticeTitle.setBackgroundColor(Color.GRAY);
         } else {
             noticeStatus = "Unread";
-            holder.textNoticeTitle.setBackgroundColor(Color.BLACK);
+            holder.textNoticeTitle.setBackgroundColor(Color.parseColor("#72bcd4"));
         }
         String formatedDataEntryDate = getFormatedDate(notice.getDataEntryDate());
         holder.textNoticeTitle.setText(notice.getFullName() + "  " + formatedDataEntryDate);
