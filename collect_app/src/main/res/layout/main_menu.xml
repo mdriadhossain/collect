@@ -11,8 +11,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="?colorSurface">
+    android:background="?colorSurface"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -52,6 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <Button
                         android:id="@+id/btn_logout"
                         android:layout_width="48dip"
@@ -59,7 +60,7 @@
                         android:layout_gravity="right"
                         android:background="@drawable/power"
                         android:padding="1dp"
-                        android:textSize="18dp" />
+                        android:textSize="18sp" />
 
                     <Button
                         android:id="@+id/enter_data"
@@ -80,6 +81,7 @@
                         android:background="@drawable/send"
                         android:padding="20dp"
                         android:textSize="21sp" />
+
                     <Button
                         android:id="@+id/review_data"
                         android:layout_width="250dip"
@@ -109,6 +111,7 @@
                         android:background="@drawable/delete"
                         android:padding="20dp"
                         android:textSize="21sp" />
+
                     <Button
                         android:id="@+id/get_forms"
                         android:layout_width="250dip"
@@ -118,7 +121,8 @@
                         android:background="@drawable/download"
                         android:padding="20dp"
                         android:textSize="21sp" />
-                    <Button
+
+                    <!--<Button
                         android:id="@+id/get_notification"
                         android:layout_width="250dip"
                         android:layout_height="50dip"
@@ -126,7 +130,42 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/notification"
                         android:padding="20dp"
-                        android:textSize="21sp" />
+                        android:textSize="21sp" />-->
+
+                    <RelativeLayout
+                        android:id="@+id/badge4"
+                        android:layout_width="250dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal">
+
+                        <RelativeLayout
+                            android:id="@+id/relative_layout3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <Button
+                                android:id="@+id/get_notification"
+                                android:layout_width="250dip"
+                                android:layout_height="50dip"
+                                android:layout_gravity="center_vertical|center_horizontal"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/notification"
+                                android:padding="20dp"
+                                android:textSize="21sp" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/badge_notification"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@id/relative_layout3"
+                            android:text=""
+                            android:textColor="#ff5722"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:ignore="RtlSymmetry" />
+                    </RelativeLayout>
+
                     <Button
                         android:id="@+id/get_showDataServer"
                         android:layout_width="250dip"
@@ -136,6 +175,7 @@
                         android:background="@drawable/server"
                         android:padding="20dp"
                         android:textSize="21sp" />
+
                     <Button
                         android:id="@+id/get_dashboard"
                         android:layout_width="250dip"
@@ -148,12 +188,32 @@
                         android:textSize="21sp" />
 
                     <TextView
+                        android:id="@+id/logged_in_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15dp"
+                        android:text="test"
+                        android:textColor="#607d8b"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/app_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:text="Application Version : 1.0.0"
+                        android:textColor="#9e9e9e" />
+
+                    <TextView
                         android:id="@+id/version_sha"
                         style="@style/TextAppearance.Collect.Caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="5dp"
                         tools:text="Developed By: Solvers" />
 
                 </LinearLayout>

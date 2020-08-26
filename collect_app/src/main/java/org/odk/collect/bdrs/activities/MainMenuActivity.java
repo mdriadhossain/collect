@@ -16,16 +16,19 @@ package org.odk.collect.bdrs.activities;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +42,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.burgstaller.okhttp.digest.fromhttpclient.BasicNameValuePair;
+import com.burgstaller.okhttp.digest.fromhttpclient.NameValuePair;
+
+import org.javarosa.core.io.BufferedInputStream;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.odk.collect.bdrs.R;
 import org.odk.collect.bdrs.activities.viewmodels.MainMenuViewModel;
 import org.odk.collect.bdrs.analytics.Analytics;
@@ -74,8 +83,13 @@ import org.odk.collect.bdrs.utilities.ToastUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.lang.ref.WeakReference;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -149,6 +163,21 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
 
     private MainMenuViewModel viewModel;
 
+    // Progress Dialog
+    private ProgressDialog pDialog;
+
+    String loggedInUserName;
+    String loggedInUserID;
+
+    // JSON parser class
+    JSONParserTotalUnreadNotification jsonParser = new JSONParserTotalUnreadNotification();
+
+    // JSON element ids from repsonse of php script:
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
+
+    //TextView txtTotalUnreadNotification;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,6 +186,24 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         setTitle(R.string.app_name);
         ButterKnife.bind(this);
         viewModel = ViewModelProviders.of(this, new MainMenuViewModel.Factory()).get(MainMenuViewModel.class);
+
+        //App Version
+        String appVersionCode = getResources().getString(R.string.app_version);
+        TextView txtVersionCode = findViewById(R.id.app_version);
+        txtVersionCode.setText("Application Version: " + appVersionCode);
+
+        //LoggedInUser
+        TextView txtLoggedInUserName = findViewById(R.id.logged_in_username);
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
+
+        if (b != null) {
+            loggedInUserID = (String) b.get("loggedInUserID");
+            loggedInUserName = (String) b.get("loggedInUser");
+            txtLoggedInUserName.setText("You are logged in as: " + loggedInUserName);
+        }
+
+        new GetCountUnreadNotification().execute();
 
         initToolbar();
         DaggerUtils.getComponent(this).inject(this);
@@ -280,21 +327,21 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
             }
         });
 
-        ConnectivityManager connec = (ConnectivityManager)getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
+        ConnectivityManager connec = (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
 
         // Notification button. no result expected.
         Button getNotificationButton = findViewById(R.id.get_notification);
         getNotificationButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ( connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+                if (connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
                         connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
                         connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
-                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED) {
 
                     Intent i = new Intent(getApplicationContext(), GetNotification.class);
                     startActivity(i);
-                }else {
+                } else {
                     Toast.makeText(MainMenuActivity.this, "Internet connection is not available!",
                             Toast.LENGTH_LONG).show();
                 }
@@ -306,14 +353,14 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         getShowDataServer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ( connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+                if (connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
                         connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
                         connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
-                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED) {
 
                     Intent i = new Intent(getApplicationContext(), ShowInServerActivity.class);
                     startActivity(i);
-                }else {
+                } else {
                     Toast.makeText(MainMenuActivity.this, "Internet connection is not available!",
                             Toast.LENGTH_LONG).show();
                 }
@@ -325,14 +372,14 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         getDashboard.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ( connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+                if (connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
                         connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
                         connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
-                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED) {
 
                     Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
                     startActivity(i);
-                }else {
+                } else {
                     Toast.makeText(MainMenuActivity.this, "Internet connection is not available!",
                             Toast.LENGTH_LONG).show();
                 }
@@ -386,6 +433,68 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         }
     }
 
+    class GetCountUnreadNotification extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(MainMenuActivity.this);
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            int success = 0;
+            try {
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(MainMenuActivity.this);
+                String mainServerURL = settings.getString(GeneralKeys.KEY_SERVER_URL, getApplication().getString(R.string.default_server_url));
+                while (mainServerURL.endsWith("/")) {
+                    mainServerURL = mainServerURL.substring(0, mainServerURL.length() - 1);
+                }
+                String getNoticeURL = getResources().getString(R.string.default_odk_get_total_unread_notification);
+
+                //String GET_NOTICE_URL = mainServerURL + getNoticeURL + "?userid=" + loggedInUserID;
+                //String GET_NOTICE_URL = mainServerURL + getNoticeURL + "?username=" + loggedInUserName;
+                String GET_NOTICE_URL = "https://steptoonline.com/lib/CountUnreadNotice.php?userid=" + loggedInUserID;
+                //String GET_NOTICE_URL = "https://steptoonline.com/lib/CountUnreadNotice.php?username=" + loggedInUserName;
+                String REQUEST_METHOD = "POST";
+
+                Timber.d(GET_NOTICE_URL);
+                Timber.d(REQUEST_METHOD);
+                Timber.tag("UserName: ").d(loggedInUserName);
+                Timber.d("starting");
+
+                JSONObject json = jsonParser.makeOkHttpRequest(GET_NOTICE_URL, REQUEST_METHOD, loggedInUserName);
+
+                // check your log for json response
+                Timber.d(json.toString());
+
+                // json success tag
+                success = json.getInt(TAG_SUCCESS);
+                if (success > 0) {
+                    Timber.tag("TotalNotice: ").d(String.valueOf(success));
+                    return json.getString(TAG_MESSAGE);
+                } else {
+                    Timber.d(json.getString(TAG_MESSAGE));
+                    return json.getString(TAG_MESSAGE);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            String totalUnreadNotificationCount = String.valueOf(success);
+            return totalUnreadNotificationCount;
+        }
+
+        protected void onPostExecute(String noticeTotalCount) {
+            // dismiss the dialog once product deleted
+            pDialog.dismiss();
+            TextView txtTotalUnreadNotification = findViewById(R.id.badge_notification);
+            //txtTotalUnreadNotification.setText("" + success);
+            txtTotalUnreadNotification.setText(noticeTotalCount);
+        }
+    }
 
     @Override
     protected void onResume() {
@@ -400,6 +509,16 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         setButtonsVisibility();
         invalidateOptionsMenu();
         setUpStorageMigrationBanner();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        // this is your backendcall
+        finish();
+        overridePendingTransition( 0, 0);
+        startActivity(getIntent());
+        overridePendingTransition( 0, 0);
     }
 
     private void setButtonsVisibility() {

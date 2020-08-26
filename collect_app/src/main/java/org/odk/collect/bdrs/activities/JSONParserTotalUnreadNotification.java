@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import timber.log.Timber;
 
 public class JSONParserTotalUnreadNotification {
     static InputStream is = null;
@@ -36,12 +37,15 @@ public class JSONParserTotalUnreadNotification {
                 .add("username", username)
                 .build();
 
-        Request request = new Request.Builder()
+        /*Request request = new Request.Builder()
                 .url(url)
                 .addHeader("User-Agent", "OkHttp Bot")
                 .post(formBody)
+                .build();*/
+        Request request = new Request.Builder()
+                .url(url)
                 .build();
-
+        Timber.tag("RequestURL: ").d(String.valueOf(request));
         // Making HTTP request
         try {
             // check for request method

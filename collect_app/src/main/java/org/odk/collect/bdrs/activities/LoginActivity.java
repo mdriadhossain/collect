@@ -233,6 +233,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     Intent i = new Intent(LoginActivity.this, MainMenuActivity.class);
                    // i.putExtra("globalUserID", String.valueOf(userIDGlobal));
                     i.putExtra("loggedInUser", username);
+                    i.putExtra("loggedInUserID", String.valueOf(success));
                     startActivity(i);
                     finish();
                     return json.getString(TAG_MESSAGE);
