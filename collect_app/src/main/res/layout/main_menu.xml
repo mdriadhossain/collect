@@ -160,8 +160,10 @@
                             android:layout_height="wrap_content"
                             android:layout_alignEnd="@id/relative_layout3"
                             android:text=""
-                            android:textColor="#ff5722"
-                            android:textSize="18sp"
+                            android:background="@drawable/rounded_textview"
+                            android:textColor="@android:color/white"
+                            android:textSize="20sp"
+                            android:gravity="center"
                             android:textStyle="bold"
                             tools:ignore="RtlSymmetry" />
                     </RelativeLayout>

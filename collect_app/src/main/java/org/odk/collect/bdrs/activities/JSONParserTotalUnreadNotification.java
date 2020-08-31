@@ -31,10 +31,10 @@ public class JSONParserTotalUnreadNotification {
 
     // function get json from url
     // by making HTTP POST or GET mehtod
-    public JSONObject makeOkHttpRequest(String url, String method, String username) {
+    public JSONObject makeOkHttpRequest(String url, String method, String userid) {
         // form parameters
         RequestBody formBody = new FormBody.Builder()
-                .add("username", username)
+                .add("userid", userid)
                 .build();
 
         /*Request request = new Request.Builder()

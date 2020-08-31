@@ -455,18 +455,17 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
                 }
                 String getNoticeURL = getResources().getString(R.string.default_odk_get_total_unread_notification);
 
-                //String GET_NOTICE_URL = mainServerURL + getNoticeURL + "?userid=" + loggedInUserID;
+                //String GET_NOTICE_URL = mainServerURL + getNoticeURL;
+                String GET_NOTICE_URL = mainServerURL + getNoticeURL + "?userid=" + loggedInUserID;
                 //String GET_NOTICE_URL = mainServerURL + getNoticeURL + "?username=" + loggedInUserName;
-                String GET_NOTICE_URL = "https://steptoonline.com/lib/CountUnreadNotice.php?userid=" + loggedInUserID;
-                //String GET_NOTICE_URL = "https://steptoonline.com/lib/CountUnreadNotice.php?username=" + loggedInUserName;
                 String REQUEST_METHOD = "POST";
 
                 Timber.d(GET_NOTICE_URL);
                 Timber.d(REQUEST_METHOD);
-                Timber.tag("UserName: ").d(loggedInUserName);
+                Timber.tag("UserID: ").d(loggedInUserID);
                 Timber.d("starting");
 
-                JSONObject json = jsonParser.makeOkHttpRequest(GET_NOTICE_URL, REQUEST_METHOD, loggedInUserName);
+                JSONObject json = jsonParser.makeOkHttpRequest(GET_NOTICE_URL, REQUEST_METHOD, loggedInUserID);
 
                 // check your log for json response
                 Timber.d(json.toString());
@@ -491,8 +490,13 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
             // dismiss the dialog once product deleted
             pDialog.dismiss();
             TextView txtTotalUnreadNotification = findViewById(R.id.badge_notification);
-            //txtTotalUnreadNotification.setText("" + success);
-            txtTotalUnreadNotification.setText(noticeTotalCount);
+            int countTotalNotice = Integer.parseInt(noticeTotalCount);
+            if (countTotalNotice > 0){
+                txtTotalUnreadNotification.setText(noticeTotalCount);
+            }else {
+                txtTotalUnreadNotification.setVisibility(View.GONE);
+            }
+
         }
     }
 
