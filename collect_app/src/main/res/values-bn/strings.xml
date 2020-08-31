@@ -41,6 +41,13 @@
   <string name="enter_data"></string>
   <!--<string name="enter_data_button">নতুন খালি ফরম পূরণ করুন</string>-->
   <string name="enter_data_button"></string>
+
+  <string name="download_form_url">Download URL</string>
+  <string name="submission_form_url">Submission URL</string>
+  <string name="notification_url">Notification URL</string>
+  <string name="user_data_report_url">Report URL</string>
+  <string name="user_dashboard_url">Dashboard URL</string>
+
   <string name="error_occured">ত্রুটি ঘটেছে</string>
   <string name="error_attaching_binary_file">মিডিয়া \"%s\" সংযুক্ত করার সময় ত্রুটি সংঘটিত হয়েছে</string>
   <string name="fetching_file">নামানো হচ্ছে %1$s.\n\n ফরম %2$s এর %3$s ফরম/(ফরমগুলি)</string>
