@@ -68,7 +68,7 @@
     <string name="delete_yes">ফর্ম মুছুন</string>
     <string name="discard_answer">উত্তর মুছুন</string>
     <string name="discard_group">গ্রুপ মুছুন</string>
-    <string name="download">নির্বাচিতটি ডাউনলোড করুন</string>
+    <string name="download">নির্বাচিত ফর্মটি ডাউনলোড করুন</string>
     <string name="download_forms_result">ডাউনলোড ফলাফল</string>
     <string name="downloading_data">সার্ভারের সাথে সংযুক্ত হচ্ছে</string>
     <string name="do_not_change">বাতিল</string>
@@ -121,7 +121,7 @@
     <string name="please_wait_long">অনুগ্রহ পূর্বক অপেক্ষা করুন।এটা কয়েক মিনিট পর্যন্ত সময় নিতে পারে।</string>
     <string name="quit_application">বাহির %s</string>
     <string name="quit_entry">ফর্ম সংরক্ষন এবং বাহির </string>
-    <string name="refresh">Refresh</string>
+    <string name="refresh">রিফ্রেশ</string>
     <string name="group_label">গ্রুপ</string>
     <string name="repeatable_group_label">Repeatable Group</string>
     <string name="replace_barcode">Replace Barcode</string>
@@ -329,7 +329,7 @@
     <string name="username_error_whitespace">Leading or trailing whitespace not allowed in usernames</string>
     <string name="url_error_whitespace">Leading or trailing whitespace not allowed</string>
     <string name="google_play_services_error_occured">Unable to access Google Maps. Is Google Play Services installed?</string>
-    <string name="about_preferences">About Data Collector</string>
+    <string name="about_preferences">ওয়েবসাইট দেখুন</string>
     <string name="tell_your_friends">Share ODK Collect</string>
     <string name="tell_your_friends_msg">Are your colleagues still collecting data on paper? Share ODK Collect with them.</string>
     <string name="leave_a_review">Leave a Play Store review</string>
