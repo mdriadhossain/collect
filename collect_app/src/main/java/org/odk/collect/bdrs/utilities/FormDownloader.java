@@ -19,6 +19,7 @@ package org.odk.collect.bdrs.utilities;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
 
 import org.javarosa.core.reference.ReferenceManager;
 import org.javarosa.core.reference.RootTranslator;
@@ -151,7 +152,7 @@ public class FormDownloader {
             Uri uri = Uri.parse(fd.getDownloadUrl());
             String frmID = uri.getQueryParameter("formId");
             DowloadedFormID.frmid= Integer.parseInt(frmID);
-            Timber.i(frmID);
+            Log.d("FormID:", frmID);
 
             if (fd.getManifestUrl() != null) {
                 finalMediaPath = FileUtils.constructMediaPath(
@@ -352,12 +353,23 @@ public class FormDownloader {
      * object representing the downloaded file.
      */
     FileResult downloadXform(String formName, String url) throws Exception {
+
+        Uri uri = Uri.parse(url);
+        String frmID = uri.getQueryParameter("formId");
+
         // clean up friendly form name...
         String rootName = FormNameUtils.formatFilenameFromFormName(formName);
 
         // proposed name of xml file...
         StoragePathProvider storagePathProvider = new StoragePathProvider();
-        String path = storagePathProvider.getDirPath(StorageSubdirectory.FORMS) + File.separator + rootName + ".xml";
+        String path = storagePathProvider.getDirPath(StorageSubdirectory.FORMS) + File.separator + rootName + "_frmid_" + frmID + ".xml";
+
+
+        Log.d("FilePath", path);
+        Log.d("FilePath", rootName);
+        Log.d("FilePathurl", url);
+        Log.d("FilePathID", frmID);
+
         int i = 2;
         File f = new File(path);
         while (f.exists()) {

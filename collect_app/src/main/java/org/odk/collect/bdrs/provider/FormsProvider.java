@@ -24,6 +24,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.odk.collect.bdrs.database.ItemsetDbAdapter;
 import org.odk.collect.bdrs.database.helpers.FormsDatabaseHelper;
@@ -184,6 +185,8 @@ public class FormsProvider extends ContentProvider {
             String filePath = storagePathProvider.getAbsoluteFormFilePath(values.getAsString(FormsColumns.FORM_FILE_PATH));
             File form = new File(filePath);
             filePath = form.getAbsolutePath(); // normalized
+
+            Log.d("FileRealPath:" , filePath);
             values.put(FormsColumns.FORM_FILE_PATH, storagePathProvider.getFormDbPath(filePath));
 
             Long now = System.currentTimeMillis();

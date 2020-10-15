@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -124,6 +125,8 @@ public class FormChooserListActivity extends FormListActivity implements
             // get uri to form
             long idFormsTable = listView.getAdapter().getItemId(position);
             Uri formUri = ContentUris.withAppendedId(FormsColumns.CONTENT_URI, idFormsTable);
+
+            Log.d("FilePath", formUri.toString());
 
             String action = getIntent().getAction();
             if (Intent.ACTION_PICK.equals(action)) {

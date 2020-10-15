@@ -576,9 +576,9 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
                     startActivity(new Intent(this, ScanQRCodeActivity.class));
                 }
                 return true;
-            case R.id.menu_about:
+            /*case R.id.menu_about:
                 startActivity(new Intent(this, AboutActivity.class));
-                return true;
+                return true;*/
             case R.id.menu_general_preferences:
                 startActivity(new Intent(this, PreferencesActivity.class));
                 return true;

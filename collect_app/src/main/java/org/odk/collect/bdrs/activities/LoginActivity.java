@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.burgstaller.okhttp.digest.fromhttpclient.BasicNameValuePair;
@@ -67,6 +68,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setTitle(R.string.app_name);
+
+        String appVersionCode = getResources().getString(R.string.app_version);
+        TextView txtVersionCode = findViewById(R.id.app_version);
+        txtVersionCode.setText("Application Version: " + appVersionCode);
 
         // setup input fields
         user = (EditText) findViewById(R.id.username);

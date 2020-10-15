@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -785,7 +786,7 @@ public class FormDownloadListActivity extends FormListActivity implements FormLi
                     : "") + "ID: " + k.getFormId() + ") - " + result.get(k));
             b.append("\n\n");
         }
-
+        Log.d("FormDetails", b.toString());
         return b.toString().trim();
     }
 

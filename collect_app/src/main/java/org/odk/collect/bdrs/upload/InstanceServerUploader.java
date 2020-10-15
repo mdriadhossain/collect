@@ -17,6 +17,8 @@ package org.odk.collect.bdrs.upload;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import org.odk.collect.bdrs.R;
@@ -168,6 +170,7 @@ public class InstanceServerUploader extends InstanceUploader {
         // server and the server will have to figure out what to do with them.
         File instanceFile = new File(instance.getAbsoluteInstanceFilePath());
         File submissionFile = new File(instanceFile.getParentFile(), "submission.xml");
+
         if (submissionFile.exists()) {
             Timber.w("submission.xml will be uploaded instead of %s", instanceFile.getAbsolutePath());
         } else {
@@ -262,7 +265,6 @@ public class InstanceServerUploader extends InstanceUploader {
         return files;
     }
 
-
     /**
      * Returns the URL this instance should be submitted to with appended deviceId.
      *
@@ -286,17 +288,38 @@ public class InstanceServerUploader extends InstanceUploader {
 
         Timber.d("Submission URL: " + urlString);
 
+        //String instanceFileName = instancem.getAbsoluteInstanceFilePath();
+        File instanceFile = new File(currentInstance.getAbsoluteInstanceFilePath());
+        File submissionFile = new File(instanceFile.getParentFile().toString());
+
+        String originalFilename = submissionFile.toString();
+        Log.d("RealFile:", originalFilename);
+
+        String[] arrayString = originalFilename.split("/");
+        String downloadedFileName = arrayString[arrayString.length - 1];
+
+        String[] arrayString2 = originalFilename.split("_");
+        String downloadedFromID = arrayString2[2];
+
+        Log.d("RealFileNew:", downloadedFileName);
+        Log.d("RealFileID:", downloadedFromID);
+
+        /*email= email.substring(email.indexOf("MAT:TO:") + 7, email.length());
+        title= title.substring(title.indexOf("SUB:") + 4, title.length());
+        body= body.substring(body.indexOf("BODY:") + 5, body.length());*/
+
         // add deviceID to request
         String updatedFormName = currentInstance.getDisplayName();
         String userid = new Integer(AndroidTutorialApp.uid).toString();
-        String formid = new Integer(DowloadedFormID.frmid).toString();
+        //String formid = new Integer(DowloadedFormID.frmid).toString();
         Timber.i("New Updated From Name::: %s", updatedFormName);
         try {
             urlString += "?deviceID=" + URLEncoder.encode(deviceId != null ? deviceId : "", "UTF-8");
             urlString += "&UserID=" + userid;
-            urlString += "&FormID=" + formid;
+            urlString += "&FormID=" + downloadedFromID;
             urlString += "&DataName=" + encode(updatedFormName);
             Timber.i("New Updated URL::: %s", urlString);
+            Log.d("RealFileUploadLink:", urlString);
             //urlString = "http://ecds.solversbd.com/Main/submission.php?deviceID=352317057029961?UserID=467?FormID=106";
         } catch (UnsupportedEncodingException e) {
             Timber.i(e, "Error encoding URL for device id : %s", deviceId);
