@@ -8,14 +8,17 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -84,6 +87,45 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
             noticeStatus = "Unread";
             holder.textNoticeTitle.setBackgroundColor(Color.parseColor("#3b5998"));
         }
+
+        holder.btnOpenReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.etReplyNotice.setVisibility(View.VISIBLE);
+                holder.btnReplyNotice.setVisibility(View.VISIBLE);
+                holder.btnOpenReply.setVisibility(View.GONE);
+            }
+        });
+
+        //Log.d("NoticeStat: ", noticeStatus);
+        holder.btnReplyNotice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+                String mainServerURL = settings.getString(GeneralKeys.KEY_SERVER_URL, context.getApplicationContext().getString(R.string.default_server_url));
+                while (mainServerURL.endsWith("/")) {
+                    mainServerURL = mainServerURL.substring(0, mainServerURL.length() - 1);
+                }
+                String securedServerBaseUrl = mainServerURL.replace("http://", "https://");
+
+                String suid = new Integer(AndroidTutorialApp.uid).toString();
+                String replyMsg = holder.etReplyNotice.getText().toString();
+                String replyToID = notice.getFromUserID();
+                String replyToName = notice.getFullName();
+
+                String getSendReplyParam = "/Main/NotificationReply.php?FromUserID=" + suid + "&ToUserID=" + replyToID + "&Notification=" + replyMsg;
+                String finalSendReplyURL = String.valueOf(Uri.parse(securedServerBaseUrl + getSendReplyParam));
+
+                Log.d("ReplyURL: ", finalSendReplyURL);
+
+                goStatusChangeURL(finalSendReplyURL);
+                Toast.makeText(context, "Succesfully Replied!", Toast.LENGTH_LONG).show();
+                holder.etReplyNotice.setVisibility(View.GONE);
+                holder.btnReplyNotice.setVisibility(View.GONE);
+                holder.btnOpenReply.setVisibility(View.VISIBLE);
+                //Log.d("ReplyMSG: ", replyMsg + " from " + suid + " to " + replyToName + "("+replyToID+")");
+            }
+        });
         String formatedDataEntryDate = getFormatedDate(notice.getDataEntryDate());
         holder.textNoticeTitle.setText(notice.getFullName() + "  " + formatedDataEntryDate);
 
@@ -127,7 +169,6 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
             //adding sliding effect
             holder.linearLayout.startAnimation(slideDown);
         }
-
 
 
         holder.textNoticeTitle.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +222,8 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
     class NoticeViewHolder extends RecyclerView.ViewHolder {
         TextView textNoticeFrom, textNoticeEntryDate, textNoticeStatus, textNoticeMessage;
         TextView textNoticeTitle;
-        Button btnCollapseNow;
+        EditText etReplyNotice;
+        Button btnCollapseNow, btnOpenReply, btnReplyNotice;
         LinearLayout linearLayout;
 
         NoticeViewHolder(View itemView) {
@@ -193,6 +235,10 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
             textNoticeStatus = itemView.findViewById(R.id.textNoticeStatus);
             textNoticeMessage = itemView.findViewById(R.id.textNoticeMessage);
             btnCollapseNow = itemView.findViewById(R.id.btnCollapse);
+
+            btnOpenReply = itemView.findViewById(R.id.btnOpenReply);
+            etReplyNotice = itemView.findViewById(R.id.etReplyNotice);
+            btnReplyNotice = itemView.findViewById(R.id.btnReplyNotice);
 
             linearLayout = itemView.findViewById(R.id.linearLayout);
         }

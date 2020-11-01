@@ -3,6 +3,7 @@ package org.odk.collect.bdrs.activities;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -77,8 +78,11 @@ public class GetNotification extends CollectAbstractActivity {
         String securedNotificationUrl = notificationURL.replace("http://", "https://");
         //String securedNotificationUrlWithParam = "https://ecds.solversbd.com/Main/Notification.php?UserID=467";
 
+        Log.d("LoggedUser: ", suid);
         url = securedNotificationUrlWithParam;
         //url = "https://steptoonline.com/lib/SampleJSON.php";
+
+        Log.d("GetNoticeURL: ", securedNotificationUrlWithParam);
 
         URL_GET_DATA = url;
 
@@ -127,6 +131,7 @@ public class GetNotification extends CollectAbstractActivity {
                                 Notice notice = new Notice(
                                         obj.getString("id"),
                                         obj.getString("FullName"),
+                                        obj.getString("FromUserID"),
                                         obj.getString("Notification"),
                                         obj.getString("Status"),
                                         obj.getString("DataEntryDate"),

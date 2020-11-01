@@ -126,6 +126,38 @@
                             android:text="OK"
                             android:textStyle="bold" />
                     </TableRow>
+                    <TableRow>
+
+                        <EditText
+                            android:id="@+id/etReplyNotice"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:width="0dp"
+                            android:hint="Your reply here."
+                            android:visibility="gone" />
+                    </TableRow>
+                    <TableRow>
+                        <Button
+                            android:id="@+id/btnReplyNotice"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:width="0dp"
+                            android:text="Send Reply"
+                            android:visibility="gone"
+                            android:textStyle="bold" />
+                    </TableRow>
+                    <TableRow>
+                        <Button
+                            android:id="@+id/btnOpenReply"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:width="0dp"
+                            android:text="Reply"
+                            android:textStyle="bold" />
+                    </TableRow>
 
                 </TableLayout>
             </LinearLayout>

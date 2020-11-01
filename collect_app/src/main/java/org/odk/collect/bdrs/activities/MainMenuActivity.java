@@ -42,6 +42,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.burgstaller.okhttp.digest.fromhttpclient.BasicNameValuePair;
 import com.burgstaller.okhttp.digest.fromhttpclient.NameValuePair;
 
@@ -217,10 +223,24 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
         btnLogout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                String mainServerURL = settings.getString(GeneralKeys.KEY_SERVER_URL, getBaseContext().getApplicationContext().getString(R.string.default_server_url));
+                while (mainServerURL.endsWith("/")) {
+                    mainServerURL = mainServerURL.substring(0, mainServerURL.length() - 1);
+                }
+                String securedServerBaseUrl = mainServerURL.replace("http://", "https://");
+
                 //SharedPreferences myPrefs = getSharedPreferences("loginPrefs", MODE_PRIVATE);
                 //SharedPreferences.Editor editor = myPrefs.edit();
                 //editor.clear();
                 //editor.apply();
+                String userId = loggedInUserID;
+                String userName = loggedInUserName;
+                String logoutInfoSendUrl = "/Main/AppLogOut.php";
+                String finalLogoutInfoSendUrl = securedServerBaseUrl + logoutInfoSendUrl + "?UserID=" + userId;
+                Log.d("LogoutInfoSendURL", finalLogoutInfoSendUrl);
+                goStatusChangeURL(finalLogoutInfoSendUrl);
+
                 Intent intent = new Intent(MainMenuActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();  // This call is missing.
@@ -432,6 +452,26 @@ public class MainMenuActivity extends CollectAbstractActivity implements AdminPa
             }
         }
     }
+
+    public void goStatusChangeURL(String statusChangeURL) {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = statusChangeURL;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Timber.tag("NoticeChangeURLRes::").d(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Timber.tag("NoticeChangeURLRes::").d(error);
+            }
+        });
+        queue.add(stringRequest);
+    }
+
 
     class GetCountUnreadNotification extends AsyncTask<String, String, String> {
 
