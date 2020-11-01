@@ -120,6 +120,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
                 goStatusChangeURL(finalSendReplyURL);
                 Toast.makeText(context, "Succesfully Replied!", Toast.LENGTH_LONG).show();
+                holder.etReplyNotice.setText("");
                 holder.etReplyNotice.setVisibility(View.GONE);
                 holder.btnReplyNotice.setVisibility(View.GONE);
                 holder.btnOpenReply.setVisibility(View.VISIBLE);
