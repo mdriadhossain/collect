@@ -11,6 +11,7 @@
 -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation" tools:locale="en">
     <string name="app_version">1.31.0</string>
+    <string name="app_version_next">1.32.0</string>
     <string name="show_password">পাসওয়ার্ড দেখুন</string>
     <string name="view_image"> ইমেজ দেখুন </string>
     <string name="annotate_image">Annotate Image</string>
